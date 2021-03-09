@@ -1,0 +1,252 @@
+<html lang="zh-Hant-TW">
+  <head>
+    <!-- 使用双花括号(double-mustache)进行 HTML 转义插值(HTML-escaped interpolation) -->
+    <title>宏利補習班</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://vjs.zencdn.net/5.19/video-js.min.css" rel="stylesheet">
+    <link rel="stylesheet" type = "text/css" href = "/css/style.css">
+    <script src="https://cdn.bootcss.com/xlsx/0.11.5/xlsx.core.min.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/http-vue-loader"></script>
+    <script src="https://unpkg.com/vuex"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <script type="text/javascript" src="/js/flot/jquery.flot.min.js"></script>
+    <script type="text/javascript" src="/js/flot/jquery.flot.symbol.min.js"></script>
+    <script type="text/javascript" src="/js/flot/jquery.flot.time.min.js"></script>
+    <script type="text/javascript" src="/js/flot/jquery.flot.axislabels.js"></script>
+</head> 
+
+  <div id="app">
+  <!-- 登入 block -->
+  <div class="modal fade login">
+    <div class="modal-dialog loginModal">
+        <div class="modal-content">
+            <div class="modal-header" style="text-align: center;">
+                <h2 class="modal-title" style="position: relative;left: 41%;color: yellowgreen;">Login</h2>
+                <button class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body loginBody">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Account：</label>
+                        <input type="email" class="form-control" id="InputAccount" aria-describedby="emailHelp" placeholder="請輸入帳號">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password：</label>
+                        <input type="password" class="form-control" id="InputPassword" placeholder="請輸入密碼">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="loginBtn" @click="login()">登入</button>
+                <button class="btn btn-danger" id="logout"  @click="logout()">登出</button>
+            </div>
+        </div>
+    </div>
+  </div>
+    <nav class="navbar navbar-expand-md navbar-light py-3" id="mainNavbar" style="background-color:#00bfff;">
+        <router-link class="navbar-brand" to="/">
+            宏利補習班
+        </router-link>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul v-if="$store.state.isTeacher" class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <router-link class="nav-link 學習報告系統" to="/report_system">學習報告</router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link 入退會系統" to="/student_state_system">學生狀態</router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link 入退會系統" to="/class_system">排班系統</router-link>
+                </li>
+            </ul>
+        </div>
+        <div v-if="userName" class="loginArea" data-toggle="modal" data-target=".login">
+            <a id="userName">{{userName}}</a>
+        </div>
+        <div v-else>
+            <button class="btn btn-primary" data-toggle="modal" data-target=".login"> 登入 </button>
+        </div>
+    </nav>
+    <router-view></router-view>
+  </div>
+</html>
+
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="/js/vue_routes.js"></script>
+<script src="/js/vue_components.js"></script>
+<script src="/js/vuex_store.js"></script>
+<script>
+    // 使用httpVueLoader
+    Vue.use(httpVueLoader);
+    Vue.use(VueRouter);
+    Vue.config.productionTip = false
+
+    new Vue({
+        el: '#app',
+        data: {
+            userName: false,
+        },
+        store,
+        created: function() {
+            let vm = this;
+            if( Cookies.get("userAccount") && Cookies.get("userPassword") ) {
+                $.ajax({
+                    type: "POST",
+                    url: "/user/login",
+                    dataType: "json",
+                    data: {
+                        userAccount: Cookies.get("userAccount"),
+                        userPassword: Cookies.get("userPassword")
+                    },
+                    success: function(response) {
+
+                        vm.userName = response.name;
+                        vm.$store.state.userInfo = response;
+
+                        // check priority to show student list
+                        if(response.privil > 1) {
+                            vm.$store.state.isTeacher = true;
+                        }
+
+                        // remove input value
+                        $('#InputAccount').val("");
+                        $('#InputPassword').val("");
+
+                        $('.modal').modal('hide');
+                        vm.$router.push( { path: '/report_system' } );
+                    },
+                    error: function (thrownError) {
+                        alert(thrownError);
+                        $('#InputAccount').val("");
+                        $('#InputPassword').val("");
+                        console.log(thrownError);
+                    }
+                });
+            }
+        },
+        methods: {
+            login() {
+                let vm = this;
+                $.ajax({
+                    type: "POST",
+                    url: "/user/login",
+                    dataType: "json",
+                    data: {
+                        userAccount: $('#InputAccount').val(),
+                        userPassword: $('#InputPassword').val()
+                    },
+                    success: function(response) {
+                        vm.userName = response.name;
+                        vm.$store.state.userInfo = response;
+
+                        // check priority to show student list
+                        if(response.privil > 1) {
+                            vm.$store.state.isTeacher = true;
+                        }
+
+                        // remove input value
+                        $('#InputAccount').val("");
+                        $('#InputPassword').val("");
+
+                        $('.modal').modal('hide');
+                        window.location.reload();
+                        vm.$router.push( { path: '/report_system' } );
+                    },
+                    error: function (thrownError) {
+                        alert("輸入錯誤");
+                        $('#InputAccount').val("");
+                        $('#InputPassword').val("");
+                        console.log(thrownError);
+                    }
+                });
+            },
+
+            logout() {
+                this.userName = false;
+                this.$store.state.userInfo = null;
+                this.$store.state.isTeacher = false;
+                Cookies.remove("userAccount");
+                Cookies.remove("userPassword");
+                Cookies.remove("jwtToken");
+                $('.modal').modal('hide');
+                window.location.reload();
+            }
+        },
+        router, 
+    });
+
+    function testAuth() {
+        $.ajax({
+            type: "POST",
+            url: "/user/testAuth",
+            headers : {
+                "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50IjoibzZtMTdnIiwicHJpdmlsIjoyLCJjbGFzc3Jvb21OYW1lIjoiaG9uZyIsImlhdCI6MTYxMzY2MzM0M30.zkBflDwC8uzJDdTI4L54uufdDt6L8e9KAAr13GxANvc"
+            },
+            dataType: "json",
+            data: {
+                password: "0920513396",
+                availibleFunction: ["all"],
+                classroomName: "hong",
+                note: ""
+            },
+            success: function (response) {
+                console.log(response);
+                console.log(document.cookie);
+            },
+            error: function (thrownError) {
+                console.log(thrownError);
+            }
+        });
+    }
+
+    function newTeacher() {
+        $.ajax({
+            type: "POST",
+            url: "/user/teacher/new",
+            dataType: "json",
+            data: {
+                password: "0920513396",
+                availibleFunction: ["all"],
+                classroomName: "hong",
+                note: ""
+            },
+            success: function(response) {
+                console.log(response);
+                console.log(document.cookie);
+            },
+            error: function (thrownError) {
+                console.log(thrownError);
+            }
+        });
+    }
+
+    function newUser() {
+        $.ajax({
+            type: "POST",
+            url: "/user/student/new",
+            dataType: "json",
+            data: {
+                parentsPhone: "0920513396",
+                enrollYear: 2021,
+                enrollMonth: 2,
+                enrollGrade: "畢業了",
+                parentsLineID: "",
+                note: ""
+            },
+            success: function(response) {
+                console.log(response);
+                console.log(document.cookie);
+            },
+            error: function (thrownError) {
+                console.log(thrownError);
+            }
+        });
+    }
+</script>

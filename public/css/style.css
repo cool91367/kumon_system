@@ -1,0 +1,120 @@
+html,body{
+    height: 100%;
+}
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80vw;
+    height: 20vh;
+}
+.systemNavbar {
+    margin-left: 0;
+}
+.displayPart{
+    border-style: solid;
+    border-radius: 50px;
+    border-width: 5px;
+}
+.studentConnect{
+    list-style-type: none;
+    font-size: 25px;
+}
+.studentConnect:hover{
+    background-color: yellow;
+    cursor: pointer;
+}
+.analyzeStoreBtn{
+    margin-left: 10px;
+}
+.analyzeBtn{
+    margin-left: 15px;
+}
+.lastPage:hover{
+    cursor: pointer;
+}
+.nextPage:hover{
+    cursor: pointer;
+}
+.analyzeLastPage:hover{
+    cursor: pointer;
+}
+.analyzeNextPage{
+    cursor: pointer;
+}
+#flot-placeholder{
+    width:90%;
+    height:70%;
+}
+.deleteStudent{
+    position: absolute;
+    right: 10px;
+}
+.deleteStudent:hover{
+    cursor: pointer;
+}
+.overview{
+    border-style: solid;
+    font-size: large;
+    text-align: center;
+    border-radius: 10px;
+    color: white;
+    background-color: #00BF00;
+}
+.overview:hover{
+    border-style: solid;
+    border-color: black;
+    cursor: pointer;
+}
+.analyzed{
+    border-style: solid;
+    font-size: large;
+    text-align: center;
+    border-radius: 10px;
+    color: white;
+    background-color: #ffa500;
+}
+.analyzed:hover{
+    border-style: solid;
+    border-color: black;
+    cursor: pointer;
+}
+.ILineFlot{
+    border-style: solid;
+    font-size: large;
+    text-align: center;
+    border-radius: 10px;
+    color: white;
+    background-color: #E7589F;
+}
+.ILineFlot:hover{
+    border-style: solid;
+    border-color: black;
+    cursor: pointer;
+}
+div.testResult.offset-1.col-2{
+    border-style: solid;
+    font-size: large;
+    text-align: center;
+    border-radius: 10px;
+    color: white;
+    background-color: #FF0000;
+}
+.testResult:hover{
+    border-style: solid;
+    border-color: black;
+    cursor: pointer;
+}
+.solidBorder{
+    border-style: solid;
+    border-color: black;
+}
+.loginArea{
+    color: gray;
+    float: right;
+}
+.loginArea:hover{
+    cursor: pointer;
+    color: black;
+    font-weight: bolder;
+}
