@@ -14,6 +14,9 @@ class ReportOperator {
 
     async addProgress(year, month, progresses) {
         for(let progress in progresses) {
+            if(progresses[progress].grade == "幼未") {
+                continue;
+            }
             await ReportModel.updateOne( {"studentId": progresses[progress].studentId }, {$pull: {progress: {
                 "year": year,
                 "month": month

@@ -179,48 +179,53 @@
                             return;
                         }
                     let row = 2;
-                    let studentNameNum = 2;
+                    let studentNameNum = 3;
                     let count = 0; // 用來計算是否換下一個學生了
                     let studentName = null;
                     let studentGrade = null;
                     let studentMath = null;
                     let studentChinese = null;
                     let studentEnglish = null;
-                    const sheet = workbook.Sheets['Sheet1'];
-                    while(sheet['A'+studentNameNum.toString()]) {
-                        if(count == 0) {
-                            studentName = sheet['A' + studentNameNum.toString()].v;
-                            studentGrade = sheet['B' + studentNameNum.toString()].v;
-                            if(sheet['C' + (studentNameNum + count).toString()]) {
-                                studentMath = sheet['C' + (studentNameNum + count).toString()].v;
-                            }
-                            count++;
-                        }
-                        else if(count == 1) {
-                            if(sheet['C' + (studentNameNum + count).toString()]) {
-                                studentChinese = sheet['C' + (studentNameNum + count).toString()].v;
-                            }
-                            count++;
-                        }
-                        else if(count == 2) {
-                            if(sheet['C' + (studentNameNum + count).toString()]) {
-                                studentEnglish = sheet['C' + (studentNameNum + count).toString()].v;
-                            }
-                            studentNameNum += 3;
-                            count = 0;
-                            // 更新 newRecord
-                            for (newRecord in vm.newRecord) {
-                                if (vm.newRecord[newRecord].studentName == studentName) {
-                                    vm.newRecord[newRecord].studentGrade = studentGrade;
-                                    vm.newRecord[newRecord].mathProgress = studentMath;
-                                    vm.newRecord[newRecord].chineseProgress = studentChinese;
-                                    vm.newRecord[newRecord].englishProgress = studentEnglish;
+                    const sheet = workbook.Sheets['進度統計表'];
+                    try{
+                        while(sheet['A'+studentNameNum.toString()]) {
+                            if(count == 0) {
+                                console.log(sheet['A' + studentNameNum.toString()])
+                                studentName = sheet['A' + studentNameNum.toString()].v;
+                                studentGrade = sheet['B' + studentNameNum.toString()].v;
+                                if(sheet['F' + (studentNameNum + count).toString()]) {
+                                    studentMath = sheet['F' + (studentNameNum + count).toString()].v;
                                 }
+                                count++;
                             }
-                            studentMath = null;
-                            studentChinese = null;
-                            studentEnglish = null;
+                            else if(count == 1) {
+                                if(sheet['F' + (studentNameNum + count).toString()]) {
+                                    studentChinese = sheet['F' + (studentNameNum + count).toString()].v;
+                                }
+                                count++;
+                            }
+                            else if(count == 2) {
+                                if(sheet['F' + (studentNameNum + count).toString()]) {
+                                    studentEnglish = sheet['F' + (studentNameNum + count).toString()].v;
+                                }
+                                studentNameNum += 3;
+                                count = 0;
+                                // 更新 newRecord
+                                for (newRecord in vm.newRecord) {
+                                    if (vm.newRecord[newRecord].studentName == studentName) {
+                                        vm.newRecord[newRecord].studentGrade = studentGrade;
+                                        vm.newRecord[newRecord].mathProgress = studentMath;
+                                        vm.newRecord[newRecord].chineseProgress = studentChinese;
+                                        vm.newRecord[newRecord].englishProgress = studentEnglish;
+                                    }
+                                }
+                                studentMath = null;
+                                studentChinese = null;
+                                studentEnglish = null;
+                            }
                         }
+                    } catch(err) {
+                        alert("檔案資料有誤 請檢查檔案")
                     }
                     // 重新更新v-model
                     vm.inputNewRecord = true;

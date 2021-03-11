@@ -542,7 +542,7 @@
     }
     .calendar{
         width:750px;
-        height:650px;
+        height:450px;
         background:#fff;
         box-shadow:0px 1px 1px rgba(0,0,0,0.1);
     }
