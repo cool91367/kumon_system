@@ -11,7 +11,7 @@ class UserSystem {
         this.classOperator = new ClassOperator();
     }
 
-    async newStudent(name, account, parentsPhone, enrollYear, enrollMonth, enrollGrade, parentsLineID, note, classDay1, classDay2) {
+    async newStudent(name, account, parentsPhone, enrollYear, enrollMonth, enrollDay, enrollGrade, parentsLineID, note, classDay1, classDay2) {
         // generate new jwt token
         const newToken = jwt.sign({ account: account, privil: 1}, SECRET);
 
@@ -23,6 +23,7 @@ class UserSystem {
             parentsPhone: parentsPhone,
             enrollYear: enrollYear,
             enrollMonth: enrollMonth,
+            enrollDay: enrollDay,
             enrollGrade: enrollGrade,
             parentsLineID: parentsLineID,
             note: note,

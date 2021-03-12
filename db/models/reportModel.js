@@ -4,6 +4,7 @@ const reportSchema = new Schema({
     studentId: {type: String, index: true },
     enrollYear: Number,
     enrollMonth: Number,
+    enrollDay: Number,
     enrollGrade: String,
     progress: [{
         grade: String,

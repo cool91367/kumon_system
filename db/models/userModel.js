@@ -17,6 +17,7 @@ const userSchema = new Schema({
     parentsPhone: String,
     enrollYear: Number,
     enrollMonth: Number,
+    enrollDay: Number,
     enrollGrade: String,
     parentsLineID: String,
     note: String,

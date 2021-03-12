@@ -13,6 +13,7 @@ router.post('/student/new', auth, async function(req, res) {
             req.body.parentsPhone, 
             req.body.enrollYear, 
             req.body.enrollMonth, 
+            req.body.enrollDay,
             req.body.enrollGrade, 
             req.body.parentsLineID,
             req.body.note,

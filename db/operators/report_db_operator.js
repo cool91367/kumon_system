@@ -7,6 +7,7 @@ class ReportOperator {
             studentId: student.account,
             enrollYear: student.enrollYear,
             enrollMonth: student.enrollMonth,
+            enrollDay: student.enrollDay,
             enrollGrade: student.enrollGrade
         });
         await newStudent.save();

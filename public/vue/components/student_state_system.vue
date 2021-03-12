@@ -41,22 +41,31 @@
                                 <label for="家長電話">家長電話:</label>
                                 <input type="text" class="form-control"  id="inputParentsPhone" placeholder="輸入家長電話">
                             </div>
-                            <div class="form-group">
-                                <label for="入會年分">入會年分:</label>
-                                <input type="text" class="form-control"  id="inputStudentEnrollYear" placeholder="輸入學生入會年分">
+                            <div class="form-group row">
+                                <div class="col-4">
+                                    <label for="入會年分">入會年分:</label>
+                                    <input type="text" class="form-control"  id="inputStudentEnrollYear" placeholder="輸入學生入會年分">
+                                </div>
+                                <div class="col-4">
+                                    <label for="入會月分">入會月分:</label>
+                                    <input type="text" class="form-control"  id="inputStudentEnrollMonth" placeholder="輸入學生入會月分">
+                                </div>
+                                <div class="col-4">
+                                    <label for="入會月分">入會日:</label>
+                                    <input type="text" class="form-control"  id="inputStudentEnrollDay" placeholder="輸入學生入會月分">
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label for="入會月分">入會月分:</label>
-                                <input type="text" class="form-control"  id="inputStudentEnrollMonth" placeholder="輸入學生入會月分">
+                                <label for="入會年級">入會學年:</label>
+                                <input type="text" class="form-control"  id="inputStudentGrade" placeholder="輸入學生入會學年">
                             </div>
-                            <div class="form-group">
-                                <label for="入會年級">入會年級:</label>
-                                <input type="text" class="form-control"  id="inputStudentGrade" placeholder="輸入學生入會年級">
-                            </div>
-                            <div class="form-group">
-                                <label for="上課日">上課日:</label>
-                                <div class="row">
+                            <div class="form-group row">
+                                <div class="col-6">
+                                    <label for="上課日">上課日一:</label>
                                     <input type="text" class="form-control col"  id="inputClassDay1" placeholder="輸入學生上課日一">
+                                </div>
+                                <div class="col-6">
+                                    <label for="上課日">上課日二:</label>
                                     <input type="text" class="form-control col"  id="inputClassDay2" placeholder="輸入學生上課日二">
                                 </div>
                             </div>
@@ -217,6 +226,7 @@
                         parentsPhone: $('#inputParentsPhone').val(),
                         enrollYear: $('#inputStudentEnrollYear').val(),
                         enrollMonth: $('#inputStudentEnrollMonth').val(),
+                        enrollDay: $('#inputStudentEnrollDay').val(),
                         enrollGrade: $('#inputStudentGrade').val(),
                         parentsLineID: $('#inputParentsLineID').val(),
                         note: $('#inputStudentNote').val(),
@@ -231,6 +241,7 @@
                         $('#inputParentsPhone').val("");
                         $('#inputStudentEnrollYear').val("");
                         $('#inputStudentEnrollMonth').val("");
+                        $('#inputStudentEnrollDay').val("");
                         $('#inputStudentGrade').val("");
                         $('#inputParentsLineID').val("");
                         $('#inputStudentNote').val("");

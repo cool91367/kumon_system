@@ -94,12 +94,13 @@
                         </div>
 
                         <div class="col-4">
-                            <!-- <div>
+                            <div>
                                 <h3>打卡資訊</h3>
                                 <div v-for="(checkIn, idx) in checkInInfo" :key="idx">
+                                    <p v-if="!checkIn.makeUp">{{checkIn.actualDay + '號'}}到班時間: {{checkIn.time}}</p>
                                     <p v-if="checkIn.makeUp">補課: {{checkIn.makeUpDay}} 補 {{checkIn.actualDay + '號'}} 的課</p>
                                 </div>
-                            </div> -->
+                            </div>
 
                             <div>
                                 <h3>請假資訊</h3>
@@ -497,10 +498,10 @@
                         for(let j = 0;j < checkInArr.length;j++) {
                             if(checkInArr[j].actualDay == i) {
                                 if(checkInArr[j].makeUp) {
-                                    str += "<li"+" style='border:1px solid #F28500;color: #996B1F; background: #FFD700'>"+ i + " (" + checkInArr[j].makeUpDay + "補)" +"</li>"; //创建日期节点
+                                    str += "<li"+" style='border:1px solid #F28500;color: #996B1F; background: #FFD700'>"+ i + "</li>"; //创建日期节点
                                 }
                                 else {
-                                    str += "<li"+myclass+">"+ i + " (" + checkInArr[j].time + ")" +"</li>"; //创建日期节点
+                                    str += "<li"+myclass+">"+ i +"</li>"; //创建日期节点
                                 }
                                 break;
                             }
@@ -541,8 +542,8 @@
         margin-top: 5%;
     }
     .calendar{
-        width:750px;
-        height:450px;
+        width:8000px;
+        height:400px;
         background:#fff;
         box-shadow:0px 1px 1px rgba(0,0,0,0.1);
     }

@@ -14,6 +14,7 @@ class UserOperator {
             parentsPhone: user.parentsPhone? user.parentsPhone : null,
             enrollYear: user.enrollYear? user.enrollYear : null,
             enrollMonth: user.enrollMonth? user.enrollMonth : null,
+            enrollDay: user.enrollDay? user.enrollDay : null,
             enrollGrade: user.enrollGrade? user.enrollGrade : null,
             parentsLineID: user.parentsLineID? user.parentsLineID : null,
             note: user.note? user.note : null,
