@@ -1,6 +1,7 @@
 const UserOperator = require('../db/operators/user_db_operator');
 const ReportOperator = require('../db/operators/report_db_operator');
 const ClassOperator = require('../db/operators/class_db_operator');
+const { uuid } = require('uuidv4');
 const jwt = require('jsonwebtoken');
 const SECRET = require('../config/credential/credential').jwtKey;
 
@@ -11,12 +12,13 @@ class UserSystem {
         this.classOperator = new ClassOperator();
     }
 
-    async newStudent(name, account, parentsPhone, enrollYear, enrollMonth, enrollDay, enrollGrade, parentsLineID, note, classDay1, classDay2) {
+    async newStudent(name, parentsPhone, enrollYear, enrollMonth, enrollDay, enrollGrade, parentsLineID, note, classDay1, classDay2) {
+        const newAccount = uuid();
         // generate new jwt token
-        const newToken = jwt.sign({ account: account, privil: 1}, SECRET);
+        const newToken = jwt.sign({ account: newAccount, privil: 1}, SECRET);
 
         const newUser = {
-            account: account,
+            account: newAccount,
             password: parentsPhone,
             name: name,
             privil: 1,

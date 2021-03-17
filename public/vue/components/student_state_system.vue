@@ -19,7 +19,9 @@
                         <br>
                         <h4>入會狀態: {{chosenStudent.enrollState}}</h4>
                         <br>
-                        <h4>學年: {{chosenStudent.grade}}</h4>
+                        <h4>學生帳號: {{chosenStudent.id}}</h4>
+                        <br>
+                        <h4>入會學年: {{chosenStudent.grade}}</h4>
                         <br>
                         <h4>未回覆訊息: {{chosenStudent.unReadMessage}}</h4>
                         <br><br>
@@ -32,10 +34,6 @@
                             <div class="form-group">
                                 <label for="學生姓名">學生姓名:</label>
                                 <input type="text" class="form-control"  id="inputStudentName" placeholder="輸入學生姓名">
-                            </div>
-                            <div class="form-group">
-                                <label for="學生編號">學生編號:</label>
-                                <input type="text" class="form-control"  id="inputStudentAccount" placeholder="輸入學生編號">
                             </div>
                             <div class="form-group">
                                 <label for="家長電話">家長電話:</label>
@@ -222,7 +220,6 @@
                     },
                     data: {
                         studentName: $('#inputStudentName').val(),
-                        newAccount: $('#inputStudentAccount').val(),
                         parentsPhone: $('#inputParentsPhone').val(),
                         enrollYear: $('#inputStudentEnrollYear').val(),
                         enrollMonth: $('#inputStudentEnrollMonth').val(),
@@ -237,7 +234,6 @@
                     success: function() {
                         alert("入會成功");
                         $('#inputStudentName').val("");
-                        $('#inputStudentAccount').val("");
                         $('#inputParentsPhone').val("");
                         $('#inputStudentEnrollYear').val("");
                         $('#inputStudentEnrollMonth').val("");

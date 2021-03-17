@@ -9,7 +9,6 @@ router.post('/student/new', auth, async function(req, res) {
     try {
         await userSystem.newStudent(
             req.body.studentName,
-            req.body.newAccount,
             req.body.parentsPhone, 
             req.body.enrollYear, 
             req.body.enrollMonth, 
