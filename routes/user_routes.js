@@ -7,7 +7,7 @@ const userSystem = new UserSystem();
 
 router.post('/student/new', auth, async function(req, res) {
     try {
-        await userSystem.newStudent(
+        const newAccount = await userSystem.newStudent(
             req.body.studentName,
             req.body.parentsPhone, 
             req.body.enrollYear, 
@@ -24,7 +24,7 @@ router.post('/student/new', auth, async function(req, res) {
         const unReadMessage = 0;
         await userSystem.addStudentToStudentList(
             req.body.teacherAccount,
-            req.body.newAccount,
+            newAccount,
             req.body.studentName,
             req.body.enrollGrade,
             enrollState,

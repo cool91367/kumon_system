@@ -37,7 +37,7 @@ class UserSystem {
         await this.reportOperator.addStudent(newUser);
         await this.classOperator.addStudent(newUser);
 
-        return newToken;
+        return newAccount;
     }
 
     async newTeacher(name, account, password, availibleFunction, classroomName, note) {
