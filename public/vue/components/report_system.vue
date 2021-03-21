@@ -239,15 +239,21 @@
             submitProgress() {
                 let progresses = [];
                 let vm = this;
+                let notComplete = false;
+                let notCompleteStudentString = "";
                 for(record in this.newRecord) {
                     // 檢查是否都有輸入到進度
                     if( !this.newRecord[record].mathProgress && !this.newRecord[record].chineseProgress && !this.newRecord[record].englishProgress && this.newRecord[record].enrollState == 1) {
-                        alert(this.newRecord[record].studentName + "資料不完整")
-                        return
+                        notComplete = true;
+                        notCompleteStudentString += this.newRecord[record].studentName + "(進度) ";
+                        // alert(this.newRecord[record].studentName + "資料不完整")
+                        // return
                     }
                     if (!this.newRecord[record].studentGrade) {
-                        alert(this.newRecord[record].studentName + "資料不完整")
-                        return
+                        notComplete = true;
+                        notCompleteStudentString += this.newRecord[record].studentName + "(學年) ";
+                        // alert(this.newRecord[record].studentName + "資料不完整")
+                        // return
                     }
                     if( $('#inputYear').val() == "" || $('#inputMonth').val() == "") {
                         alert("未輸入年月份")
@@ -264,6 +270,10 @@
                     if(this.newRecord[record].enrollState == 1) {
                         progresses.push(progress);
                     }
+                }
+                if(notComplete) {
+                    alert(notCompleteStudentString + "資料不完整");
+                    return
                 }
                 $.ajax({
                     type: "POST",
