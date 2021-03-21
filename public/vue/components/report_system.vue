@@ -200,13 +200,13 @@
                             }
                             else if(count == 1) {
                                 if(sheet['F' + (studentNameNum + count).toString()]) {
-                                    studentChinese = sheet['F' + (studentNameNum + count).toString()].v;
+                                    studentEnglish = sheet['F' + (studentNameNum + count).toString()].v;
                                 }
                                 count++;
                             }
                             else if(count == 2) {
                                 if(sheet['F' + (studentNameNum + count).toString()]) {
-                                    studentEnglish = sheet['F' + (studentNameNum + count).toString()].v;
+                                    studentChinese = sheet['F' + (studentNameNum + count).toString()].v;
                                 }
                                 studentNameNum += 3;
                                 count = 0;
@@ -225,6 +225,7 @@
                             }
                         }
                     } catch(err) {
+                        console.log(err);
                         alert("檔案資料有誤 請檢查檔案")
                     }
                     // 重新更新v-model
