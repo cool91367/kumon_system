@@ -242,15 +242,15 @@
                 for(record in this.newRecord) {
                     // 檢查是否都有輸入到進度
                     if( !this.newRecord[record].mathProgress && !this.newRecord[record].chineseProgress && !this.newRecord[record].englishProgress && this.newRecord[record].enrollState == 1) {
-                        alert("資料不完整!!")
+                        alert(this.newRecord[record].studentName + "資料不完整")
                         return
                     }
                     if (!this.newRecord[record].studentGrade) {
-                        alert("資料不完整")
+                        alert(this.newRecord[record].studentName + "資料不完整")
                         return
                     }
                     if( $('#inputYear').val() == "" || $('#inputMonth').val() == "") {
-                        alert("資料不完整")
+                        alert("未輸入年月份")
                         return
                     }
                     const progress = {
