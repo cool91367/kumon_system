@@ -134,13 +134,41 @@ function drawFlot(select, progress, isTeacher){
     var dataMath = [];
     var dataChinese = [];
     var dataEnglish = [];
-    var dataILine = [];
+    var dataILineMath = [];
+    var dataILineMathYear = [];
+    var dataILineMathMonth = [];
+    var dataILineChinese = [];
+    var dataILineChineseYear = [];
+    var dataILineChineseMonth = [];
+    var dataILineEnglish = [];
+    var dataILineEnglishYear = [];
+    var dataILineEnglishMonth = [];
     var dataset;
+    let mathCount = 0;
+    let chineseCount = 0;
+    let englishCount = 0;
     for(i = 0;i < progress.length;i++){
-        dataMath.push([i, turnNum(replaceSubjectTitle(progress[i].progress.math))]);
-        dataChinese.push([i, turnNum(replaceSubjectTitle(progress[i].progress.chinese))]);
-        dataEnglish.push([i, turnNum(replaceSubjectTitle(progress[i].progress.english))]);
-        dataILine.push([i , turnNum(replaceSubjectTitle(progress[i].progress.ILine))]);
+        if(progress[i].progress.math) {
+            dataMath.push([mathCount, turnNum(replaceSubjectTitle(progress[i].progress.math))]);
+            dataILineMath.push([mathCount , turnNum(replaceSubjectTitle(progress[i].progress.ILine))]);
+            dataILineMathYear.push(progress[i].year);
+            dataILineMathMonth.push(progress[i].month);
+            mathCount++;
+        }
+        if(progress[i].progress.chinese) {
+            dataChinese.push([chineseCount, turnNum(replaceSubjectTitle(progress[i].progress.chinese))]);
+            dataILineChinese.push([chineseCount , turnNum(replaceSubjectTitle(progress[i].progress.ILine))]);
+            dataILineChineseYear.push(progress[i].year);
+            dataILineChineseMonth.push(progress[i].month);
+            chineseCount++;
+        }
+        if(progress[i].progress.english) {
+            dataEnglish.push([englishCount, turnNum(replaceSubjectTitle(progress[i].progress.english))]);
+            dataILineEnglish.push([englishCount , turnNum(replaceSubjectTitle(progress[i].progress.ILine))]);
+            dataILineEnglishYear.push(progress[i].year);
+            dataILineEnglishMonth.push(progress[i].month);
+            englishCount++;
+        }
     }
     // select subject
     if(select == "math"){
@@ -153,7 +181,7 @@ function drawFlot(select, progress, isTeacher){
             {
                 label: "I線",
                 color: "red",
-                data: dataILine,
+                data: dataILineMath,
             }
         ];
     }
@@ -167,7 +195,7 @@ function drawFlot(select, progress, isTeacher){
             {
                 label: "I線",
                 color: "red",
-                data: dataILine,
+                data: dataILineChinese,
             }
         ];
     }
@@ -181,7 +209,7 @@ function drawFlot(select, progress, isTeacher){
             {
                 label: "I線",
                 color: "red",
-                data: dataILine,
+                data: dataILineEnglish,
             }
         ];
     }
@@ -195,7 +223,7 @@ function drawFlot(select, progress, isTeacher){
             {
                 label: "I線",
                 color: "red",
-                data: dataILine,
+                data: dataILineMath,
             }
         ];
     }
@@ -215,7 +243,15 @@ function drawFlot(select, progress, isTeacher){
                 if(val == -1){
                     alert('資料不足，無法畫圖');
                 }
-                return progress[val].year + '年' + progress[val].month + '月';
+                if(select == "math") {
+                    return dataILineMathYear[val] + '年' + dataILineMathMonth[val] + '月';
+                }
+                else if(select == "chinese") {
+                    return dataILineChineseYear[val] + '年' + dataILineChineseMonth[val] + '月';
+                }
+                else if(select == "english") {
+                    return dataILineEnglishYear[val] + '年' + dataILineEnglishMonth[val] + '月';
+                }
             },
             axisLabelUseCanvas: true,
         },
