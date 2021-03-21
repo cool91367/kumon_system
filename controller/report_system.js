@@ -37,6 +37,9 @@ class ReportSystem {
 
     async addProgressRecord(year, month, progresses) {
         for (const progress in progresses) {
+            if(progresses[progress].grade == "幼未") {
+                continue;
+            }
             progresses[progress].ILine = ILine[progresses[progress].grade][month.toString()];
             if(progresses[progress].math) {
                 let math = progresses[progress].math;
