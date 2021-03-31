@@ -574,8 +574,12 @@
                     }
                     else if (weekDay == day1 || weekDay == day2){
                         if(classCount < 8){
+                            console.log(classCount, i);
                             myclass = " class='red redbox'";//應該上課日
                             classCount++;
+                        }
+                        else{
+                            myclass = " class='darkgrey'";
                         }
                     }else{
                         myclass = " class='darkgrey'"; //当该日期在今天之后时，以深灰字体显示
