@@ -264,6 +264,12 @@
         methods: {
             dayOff() {
                 let vm = this;
+
+                // 同時兼容西元年及民國年
+                let dayOffYear = $('#InputDayOffYear').val();
+                dayOffYear = parseInt(dayOffYear);
+                dayOffYear = dayOffYear < 1000? dayOffYear + 1911 : dayOffYear;
+
                 $.ajax({
                     type: "POST",
                     url: "/class/dayOff/update",
@@ -273,7 +279,7 @@
                     },
                     data: {
                         studentId: vm.chosenStudent.id, 
-                        year: $('#InputDayOffYear').val(), 
+                        year: dayOffYear.toString(), 
                         month: $('#InputDayOffMonth').val(), 
                         day: $('#InputDayOffDay').val(), 
                         reason: $('#InputDayOffReason').val()
