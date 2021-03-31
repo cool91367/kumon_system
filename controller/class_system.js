@@ -30,6 +30,10 @@ class ClassSystem {
     async getDayOffByYearAndMonth(studentId, year, month) {
         return await this.classOperator.getDayOffByYearAndMonth(studentId, year, month);
     }
+
+    async deleteCheckInByYearAndMonthAndDay(studentId, year, month, day) {
+        return await this.classOperator.deleteCheckInByStudentId(studentId, year, month, day);
+    }
 }
 
 module.exports = ClassSystem

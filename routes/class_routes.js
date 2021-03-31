@@ -95,4 +95,19 @@ router.get('/:studentId/:year/:month/dayOff', auth, async function(req, res) {
     return res.status(200).send(result);
 });
 
+router.post('/checkIn/delete', auth, async function(req, res) {
+    try {
+        await classSystem.deleteCheckInByYearAndMonthAndDay(
+            req.body.studentId,
+            req.body.year,
+            req.body.month,
+            req.body.day
+        );
+    } catch(err) {
+        console.log(err);
+        return res.status(500).send( {err: err.message} );
+    }
+    return res.status(200).send( {message: "OK"} );
+})
+
 module.exports = router;

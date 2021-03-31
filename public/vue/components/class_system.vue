@@ -52,6 +52,31 @@
             </div>
         </div>
 
+        <!-- 取消打卡的model -->
+        <div class="modal fade deleteCheckInModal">
+            <div class="modal-dialog loginModal">
+                <div class="modal-content">
+                    <div class="modal-header" style="text-align: center;">
+                        <h2 class="modal-title" style="position: relative;left: 41%;color: yellowgreen;">取消打卡</h2>
+                        <button class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">取消打卡日:</label>
+                                <input type="text" class="form-control" id="deleteCheckInYear"  placeholder="請輸入取消打卡年">
+                                <input type="text" class="form-control" id="deleteCheckInMonth"  placeholder="請輸入取消打卡月">
+                                <input type="text" class="form-control" id="deleteCheckInDay"  placeholder="請輸入取消打卡日">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" @click="deleteCheckIn()">確認送出</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <div class="row" style="height: 100%;">
             <div v-if="$store.state.isTeacher" class="col-2 studentList" style="background-color: #ABDCFF;height: 100%; overflow: auto;position: relative;" >
@@ -71,8 +96,8 @@
                             <div class="title" style="position: relative;">
                                 <h1 class="green" id="calendar-title">Month</h1>
                                 <h2 class="green small" id="calendar-year">Year</h2>
-                                <a href="" id="prev">Prev Month</a>
-                                <a href="" id="next" style="position: absolute;right: 0;">Next Month</a>
+                                <a href="" id="prev">上個月</a>
+                                <a href="" id="next" style="position: absolute;right: 0;">下個月</a>
                             </div>
                             <div class="body">
                                 <div class="lightgrey body-list">
@@ -113,6 +138,7 @@
                     <button class="btn btn-primary" @click="checkIn">打卡上課</button>
                     <button class="btn btn-success" data-toggle="modal" data-target=".makeUp" style="margin-left: 10px">補打卡</button>
                     <button class="btn btn-danger" data-toggle="modal" data-target=".dayOff" style="margin-left: 10px">請假</button>
+                    <button class="btn btn-danger" data-toggle="modal" data-target=".deleteCheckInModal" style="margin-left: 10px">取消打卡</button>
                 </div>
             </div>
         </div>
@@ -122,7 +148,7 @@
 <script>
     var month_olympic = [31,29,31,30,31,30,31,31,30,31,30,31];
     var month_normal = [31,28,31,30,31,30,31,31,30,31,30,31];
-    var month_name = ["January","Febrary","March","April","May","June","July","Auguest","September","October","November","December"];
+    var month_name = ["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"];
     var my_date = new Date();
     var my_year = my_date.getFullYear();
     var my_month = my_date.getMonth();
@@ -325,6 +351,57 @@
                 });
             },
 
+            async deleteCheckIn() {
+                let vm = this;
+                const my_date = new Date();
+                // 同時兼容西元年及民國年
+                let deleteCheckInYear = $('#deleteCheckInYear').val();
+                deleteCheckInYear = parseInt(deleteCheckInYear);
+                deleteCheckInYear = deleteCheckInYear < 1000? deleteCheckInYear + 1911 : deleteCheckInYear;
+
+                $.ajax({
+                    type: "POST",
+                    url: "/class/checkIn/delete",
+                    dataType: "json",
+                    headers : {
+                        "Authorization": Cookies.get("jwtToken")
+                    },
+                    data: {
+                        studentId: vm.chosenStudent.id, 
+                        year: deleteCheckInYear.toString(), 
+                        month: $('#deleteCheckInMonth').val(), 
+                        day: $('#deleteCheckInDay').val(), 
+                    },
+                    success: function(response) {
+                        alert("取消打卡成功");
+                        $('#deleteCheckInYear').val("");
+                        $('#deleteCheckInMonth').val("");
+                        $('#deleteCheckInDay').val("");
+                        $.ajax({
+                            type: "GET",
+                            url: "/class/" + vm.chosenStudent.id + "/" + my_year + "/" + (my_month + 1) + "/checkIn",
+                            dataType: "json",
+                            headers : {
+                                "Authorization": Cookies.get("jwtToken")
+                            },
+                            success: function(response) {
+                                vm.checkInInfo = response;
+                                refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo);
+                            },
+                            error: function(err) {
+                                alert({err: err.message});
+                                return
+                            }
+                        });
+                        $('.deleteCheckInModal').modal('hide');
+                    },
+                    error: function(err) {
+                        alert({err: err.message});
+                        return
+                    }
+                });
+            },
+
             async getStudentInfo(event) {
                 let vm = this;
                 this.inputNewStudent = false;
@@ -412,6 +489,11 @@
             makeUp() {
                 let vm = this;
                 const my_date = new Date();
+                // 同時兼容西元年及民國年
+                let makeUpYear = $('#inputMakeUpYear').val();
+                makeUpYear = parseInt(makeUpYear);
+                makeUpYear = makeUpYear < 1000? makeUpYear + 1911 : makeUpYear;
+
                 $.ajax({
                     type: "POST",
                     url: "/class/makeUp/update",
@@ -421,7 +503,7 @@
                     },
                     data: {
                         studentId: vm.chosenStudent.id, 
-                        year: $('#inputMakeUpYear').val(), 
+                        year: makeUpYear.toString(), 
                         month: $('#inputMakeUpMonth').val(), 
                         actualDay: $('#inputMakeUpDay').val(),
                         makeUpDay:  my_date.getFullYear().toString() + '/' + (my_date.getMonth() + 1).toString() + '/' +  my_date.getDate().toString(),

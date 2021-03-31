@@ -226,6 +226,39 @@ class ClassOperator {
             "days": oldData[0].checkIn.days? oldData[0].checkIn.days : [],
         }}});
     }
+
+    async deleteCheckInByStudentId(studentId, year, month, day) {
+        let oldData = await ClassModel.aggregate( [
+            { "$match": {"studentId": studentId} },
+            { "$unwind": "$checkIn" },
+            { "$match": {"checkIn.year": year, "checkIn.month": month} }
+        ]);
+        let newCheckInArr = []
+
+        await ClassModel.updateOne( {"studentId": studentId }, {$pull: {checkIn: {
+            "year": year,
+            "month": month
+        }}});
+
+        if(oldData[0].checkIn){
+            for(let i = 0;i < oldData[0].checkIn.days.length;i++) {
+                console.log(oldData[0].checkIn.days[i])
+                if(oldData[0].checkIn.days[i].actualDay == day) {
+                    continue;
+                }
+                else {
+                    newCheckInArr.push(oldData[0].checkIn.days[i])
+                }
+            }
+        }
+
+        await ClassModel.updateOne( {"studentId": studentId }, {$push: {checkIn: {
+            "year": year,
+            "month": month,
+            "note": oldData[0].checkIn.note? oldData[0].checkIn.note : [],
+            "days": newCheckInArr,
+        }}});
+    }
 }
 
 module.exports = ClassOperator;
