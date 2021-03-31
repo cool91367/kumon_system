@@ -24,6 +24,29 @@
             </div>
         </div>
 
+        <div class="modal fade changeClassDayModal">
+            <div class="modal-dialog loginModal">
+                <div class="modal-content">
+                    <div class="modal-header" style="text-align: center;">
+                        <h2 class="modal-title" style="position: relative;left: 41%;color: yellowgreen;">更改上課日</h2>
+                        <button class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">上課日:</label>
+                                <input type="text" class="form-control" id="inputClassDay1"  placeholder="請輸入上課日一">
+                                <input type="text" class="form-control" id="inputClassDay2"  placeholder="請輸入上課日二">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" @click="changeClassDay()">確認送出</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="modal fade dayOff">
             <div class="modal-dialog loginModal">
                 <div class="modal-content">
@@ -82,7 +105,7 @@
             <div v-if="$store.state.isTeacher" class="col-2 studentList" style="background-color: #ABDCFF;height: 100%; overflow: auto;position: relative;" >
                 <br>
                 <ul v-for="(student, idx) in $store.state.userInfo.studentList" :key="idx">
-                    <li v-if="student.enrollState == 1" class="studentConnect" style="display: inline;" :id="student.studentId"  @click="getStudentInfo($event)"><a>{{ student.studentName }}</a></li>
+                    <li v-if="student.enrollState == 1" class="studentConnect" style="display: inline;" :id="student.studentId"  @click="getStudentInfo($event)"><a>{{idx+1}}. {{ student.studentName }}</a></li>
                 </ul>
             </div>
 
@@ -139,6 +162,7 @@
                     <button class="btn btn-success" data-toggle="modal" data-target=".makeUp" style="margin-left: 10px">補打卡</button>
                     <button class="btn btn-danger" data-toggle="modal" data-target=".dayOff" style="margin-left: 10px">請假</button>
                     <button class="btn btn-danger" data-toggle="modal" data-target=".deleteCheckInModal" style="margin-left: 10px">取消打卡</button>
+                    <button class="btn btn-warning" data-toggle="modal" data-target=".changeClassDayModal" style="margin-left: 100px">更改上課日</button>
                 </div>
             </div>
         </div>
@@ -262,6 +286,51 @@
             }
         },
         methods: {
+            changeClassDay() {
+                let vm = this;
+
+                $.ajax({
+                    type: "POST",
+                    url: "/class/classDay/update",
+                    dataType: "json",
+                    headers : {
+                        "Authorization": Cookies.get("jwtToken")
+                    },
+                    data: {
+                        studentId: vm.chosenStudent.id, 
+                        classDay1: $('#inputClassDay1').val(),
+                        classDay2: $('#inputClassDay2').val()
+                    },
+                    success: function(response) {
+                        alert("更改成功");
+                        $('#inputClassDay1').val("");
+                        $('#inputClassDay2').val("");
+                        $('.changeClassDayModal').modal('hide');
+                        $.ajax({
+                            type: "GET",
+                            url: "/class/" + vm.chosenStudent.id + "/classDay",
+                            dataType: "json",
+                            headers : {
+                                "Authorization": Cookies.get("jwtToken")
+                            },
+                            success: function(response) {
+                                vm.classDay1 = response.classDay1;
+                                vm.classDay2 = response.classDay2;
+                                refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo);
+                            },
+                            error: function(err) {
+                                alert({err: err.message});
+                                return
+                            }
+                        });
+                    },
+                    error: function(err) {
+                        alert({err: err.message});
+                        return
+                    }
+                });
+            },
+
             dayOff() {
                 let vm = this;
 

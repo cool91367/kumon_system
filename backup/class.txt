@@ -1,0 +1,1028 @@
+[
+    {
+        "_id" : ObjectId("6051fd24ce187651d375db80"),
+        "studentId" : "8bd8a08a-bc5c-4e6f-aa2f-96acef083050",
+        "classDay1" : "2",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("6051fd24ce187651d375db81"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("6051ffd5ce187651d375db85"),
+        "studentId" : "daff06ed-8dcc-4ff8-ae58-bdb301149571",
+        "classDay1" : "3",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("6063f6b1bd1e034dfcbbe720"),
+                "year" : "2021",
+                "month" : "3",
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60520260ce187651d375db8a"),
+        "studentId" : "63b12e97-113b-4a9e-970f-eca04ad8bbbd",
+        "classDay1" : "2",
+        "classDay2" : "",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60520260ce187651d375db8b"),
+                "note" : [],
+                "days" : []
+            }, 
+            {
+                "_id" : ObjectId("60597dd6f557151b4bdbb56b"),
+                "year" : "3/23",
+                "month" : "",
+                "note" : [ 
+                    {
+                        "_id" : ObjectId("60597dd6f557151b4bdbb56c"),
+                        "day" : "",
+                        "text" : ""
+                    }
+                ],
+                "days" : []
+            }, 
+            {
+                "_id" : ObjectId("6063cab4f557151b4bdbb5b7"),
+                "year" : "",
+                "month" : "",
+                "note" : [ 
+                    {
+                        "_id" : ObjectId("6063caa5f557151b4bdbb5b6"),
+                        "day" : "",
+                        "text" : ""
+                    }
+                ],
+                "days" : [ 
+                    {
+                        "_id" : ObjectId("6063cab4f557151b4bdbb5b9"),
+                        "makeUp" : true,
+                        "makeUpDay" : "2021/3/31",
+                        "actualDay" : "",
+                        "time" : "9:4"
+                    }
+                ]
+            }, 
+            {
+                "_id" : ObjectId("6063cb41f557151b4bdbb5bd"),
+                "year" : "110",
+                "month" : "3",
+                "note" : [ 
+                    {
+                        "_id" : ObjectId("6059f472f557151b4bdbb570"),
+                        "day" : "23",
+                        "text" : "考試"
+                    }, 
+                    {
+                        "_id" : ObjectId("6063cafaf557151b4bdbb5bc"),
+                        "day" : "30",
+                        "text" : "考試"
+                    }
+                ],
+                "days" : [ 
+                    {
+                        "_id" : ObjectId("6063cb41f557151b4bdbb5c0"),
+                        "makeUp" : true,
+                        "makeUpDay" : "2021/3/31",
+                        "actualDay" : "31",
+                        "time" : "9:7"
+                    }
+                ]
+            }, 
+            {
+                "_id" : ObjectId("6063ed69f557151b4bdbb5cc"),
+                "year" : "2021",
+                "month" : "3",
+                "note" : [ 
+                    {
+                        "_id" : ObjectId("6059f484f557151b4bdbb572"),
+                        "day" : "23",
+                        "text" : "考試"
+                    }, 
+                    {
+                        "_id" : ObjectId("6063ed69f557151b4bdbb5ce"),
+                        "day" : "30",
+                        "text" : "考試"
+                    }
+                ],
+                "days" : [ 
+                    {
+                        "_id" : ObjectId("60597dbff557151b4bdbb56a"),
+                        "makeUp" : false,
+                        "makeUpDay" : "",
+                        "actualDay" : "23",
+                        "time" : "13:33"
+                    }, 
+                    {
+                        "_id" : ObjectId("6063cb51f557151b4bdbb5c4"),
+                        "makeUp" : false,
+                        "makeUpDay" : "",
+                        "actualDay" : "31",
+                        "time" : "9:7"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60535327ce187651d375db8f"),
+        "studentId" : "25e67295-7765-43b1-901a-4f6071e12174",
+        "classDay1" : "3",
+        "classDay2" : "4",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60535327ce187651d375db90"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("605353bcce187651d375db94"),
+        "studentId" : "5e9ee054-dd2f-4923-a32f-1c61a68e962c",
+        "classDay1" : "3",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("605353bcce187651d375db95"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60535402ce187651d375db99"),
+        "studentId" : "7b8a2d1d-3579-40d6-964a-ef4bd1ca5963",
+        "classDay1" : "3",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60535402ce187651d375db9a"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("6053543ece187651d375db9e"),
+        "studentId" : "71cf7fd2-b408-49a2-998a-312d59e8ddd4",
+        "classDay1" : "3",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("6053543ece187651d375db9f"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60535480ce187651d375dba3"),
+        "studentId" : "0eb25842-70f9-4e7b-a29b-40c89ef0815c",
+        "classDay1" : "2",
+        "classDay2" : "4",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60535480ce187651d375dba4"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("605354c5ce187651d375dba8"),
+        "studentId" : "fbb6d8dc-e8b2-4d96-8e19-58c99afe56e4",
+        "classDay1" : "3",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("605354c5ce187651d375dba9"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60535515ce187651d375dbad"),
+        "studentId" : "4c73708e-d0ad-44b3-ab50-34dbd63b6a5a",
+        "classDay1" : "3",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60535515ce187651d375dbae"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60535550ce187651d375dbb2"),
+        "studentId" : "55e03a90-e1bc-48b2-b4f2-45e6d9d2a06a",
+        "classDay1" : "2",
+        "classDay2" : "4",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60535550ce187651d375dbb3"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60535584ce187651d375dbb7"),
+        "studentId" : "21bb5537-65e7-4742-b9af-be3276cc6485",
+        "classDay1" : "3",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60535584ce187651d375dbb8"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("605355eece187651d375dbbc"),
+        "studentId" : "3f2a22b8-8345-4c9e-8fed-8e4172e90d87",
+        "classDay1" : "2",
+        "classDay2" : "4",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("605355eece187651d375dbbd"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60535645ce187651d375dbc1"),
+        "studentId" : "ce28c6d0-b2d9-4680-ac9a-4ec7f30a4726",
+        "classDay1" : "2",
+        "classDay2" : "4",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60535645ce187651d375dbc2"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("605356d4ce187651d375dbc6"),
+        "studentId" : "e9d953ec-93af-4373-9da1-05d388a46153",
+        "classDay1" : "3",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("605356d4ce187651d375dbc7"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("6053572ece187651d375dbcb"),
+        "studentId" : "37245075-8eb0-41e3-b7a1-98cde99458f1",
+        "classDay1" : "2",
+        "classDay2" : "4",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("6053572ece187651d375dbcc"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60535782ce187651d375dbd0"),
+        "studentId" : "c476f5f7-a45d-4296-afa6-3b11477555e9",
+        "classDay1" : "3",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60535782ce187651d375dbd1"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("605357c7ce187651d375dbd5"),
+        "studentId" : "5fea7011-8bbc-400e-a5ff-6b6a0e2a0b51",
+        "classDay1" : "3",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("605357c7ce187651d375dbd6"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60535813ce187651d375dbda"),
+        "studentId" : "59b11f36-5dbb-48f6-87f6-51a96990373a",
+        "classDay1" : "3",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60535813ce187651d375dbdb"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60535850ce187651d375dbdf"),
+        "studentId" : "3f348df1-5f91-43f9-8722-cfaded3bf0f4",
+        "classDay1" : "3",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60535850ce187651d375dbe0"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60535921ce187651d375dbe4"),
+        "studentId" : "97245c1e-b79d-43e4-abbf-d9f55d6f4aa3",
+        "classDay1" : "2",
+        "classDay2" : "4",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60535921ce187651d375dbe5"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("605414cece187651d375dbe9"),
+        "studentId" : "a3f3836b-e011-47d2-b69c-51ca1ff747a8",
+        "classDay1" : "2",
+        "classDay2" : "4",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("605414cece187651d375dbea"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("6054151fce187651d375dbee"),
+        "studentId" : "f7e4b1d3-815b-4ed6-adb3-7d28113bd0a0",
+        "classDay1" : "2",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("6054151fce187651d375dbef"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60541589ce187651d375dbf3"),
+        "studentId" : "5075be01-25be-4f87-9391-f44a99368a7a",
+        "classDay1" : "4",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60541589ce187651d375dbf4"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("605415ebce187651d375dbf8"),
+        "studentId" : "6e72a577-bc42-4cd9-82d3-015324a0f58d",
+        "classDay1" : "2",
+        "classDay2" : "4",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("605415ebce187651d375dbf9"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("6054166ece187651d375dbfd"),
+        "studentId" : "91dbff41-0d1d-4cdb-8961-0e35ec080bb3",
+        "classDay1" : "",
+        "classDay2" : "",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("6054166ece187651d375dbfe"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("605416c1ce187651d375dc02"),
+        "studentId" : "6ba747d2-eafa-4a8b-adc5-82946e485e24",
+        "classDay1" : "3",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("605416c1ce187651d375dc03"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60541754ce187651d375dc07"),
+        "studentId" : "d25e6c4c-4203-4dbd-bfd7-3282269bc883",
+        "classDay1" : "3",
+        "classDay2" : "4",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60541754ce187651d375dc08"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60541883ce187651d375dc0c"),
+        "studentId" : "6b359d9c-4114-4ebc-bef4-e82779c04ec1",
+        "classDay1" : "3",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60541883ce187651d375dc0d"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60541c1cce187651d375dc11"),
+        "studentId" : "7602fc1b-5d74-427f-8df8-59ea1616e92a",
+        "classDay1" : "2",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60541c1cce187651d375dc12"),
+                "note" : [],
+                "days" : []
+            }, 
+            {
+                "_id" : ObjectId("6063e618f557151b4bdbb5c9"),
+                "year" : "2021",
+                "month" : "4",
+                "note" : [ 
+                    {
+                        "_id" : ObjectId("6063e618f557151b4bdbb5ca"),
+                        "day" : "27",
+                        "text" : "有事請假"
+                    }
+                ],
+                "days" : [ 
+                    {
+                        "_id" : ObjectId("6063e5fcf557151b4bdbb5c8"),
+                        "makeUp" : true,
+                        "makeUpDay" : "2021/3/31",
+                        "actualDay" : "27",
+                        "time" : "11:1"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60541cb4ce187651d375dc16"),
+        "studentId" : "5b872bbe-f694-4dd4-9d29-b9cb853aa7cb",
+        "classDay1" : "2",
+        "classDay2" : "4",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60541cb4ce187651d375dc17"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60541f63ce187651d375dc1b"),
+        "studentId" : "7a1a4e37-9326-403f-82c4-d709f4bf286b",
+        "classDay1" : "3",
+        "classDay2" : "4",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60541f63ce187651d375dc1c"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60541fdfce187651d375dc20"),
+        "studentId" : "db92e2bc-53cc-48ca-8ce8-0c1aa289ef75",
+        "classDay1" : "2",
+        "classDay2" : "3",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60541fdfce187651d375dc21"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("6054203ece187651d375dc25"),
+        "studentId" : "672cdf30-20be-4bb1-8226-a055886124d2",
+        "classDay1" : "",
+        "classDay2" : "",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("6054203ece187651d375dc26"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("605421d7ce187651d375dc2a"),
+        "studentId" : "14a9935f-e5c2-4f9a-b409-9d4f12c9d5cb",
+        "classDay1" : "3",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("605421d7ce187651d375dc2b"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60542250ce187651d375dc2f"),
+        "studentId" : "e421a398-0583-47b7-ab6e-3b0340b9260a",
+        "classDay1" : "2",
+        "classDay2" : "4",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60542250ce187651d375dc30"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60542c1ece187651d375dc34"),
+        "studentId" : "35c5ac5b-90b2-4fd4-936f-1837d6a94dff",
+        "classDay1" : "2",
+        "classDay2" : "4",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60542c1ece187651d375dc35"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60542c6dce187651d375dc39"),
+        "studentId" : "9e9ef719-bd3c-44a6-b1b6-f4282c1fc1c1",
+        "classDay1" : "3",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60542c6dce187651d375dc3a"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60542ccece187651d375dc3e"),
+        "studentId" : "60da0563-91c1-4689-8c5f-53ae4276f5c6",
+        "classDay1" : "3",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60542ccece187651d375dc3f"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60542d07ce187651d375dc43"),
+        "studentId" : "25ffe0fa-6c00-4cf0-a687-fcd997e07536",
+        "classDay1" : "",
+        "classDay2" : "",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60542d07ce187651d375dc44"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60542d88ce187651d375dc48"),
+        "studentId" : "9cf67eb8-0654-4980-9519-2ced06f4f1a5",
+        "classDay1" : "2",
+        "classDay2" : "4",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60542d88ce187651d375dc49"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60542e1ace187651d375dc4d"),
+        "studentId" : "b0bc38f0-97c2-4602-ad70-0f244f217294",
+        "classDay1" : "2",
+        "classDay2" : "4",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60542e1ace187651d375dc4e"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60542e53ce187651d375dc52"),
+        "studentId" : "7246cebd-7242-4f38-9885-4fa3a7807635",
+        "classDay1" : "2",
+        "classDay2" : "4",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60542e53ce187651d375dc53"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60542e90ce187651d375dc57"),
+        "studentId" : "3ac07487-d652-4fc8-945a-107ca3bc118d",
+        "classDay1" : "3",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60542e90ce187651d375dc58"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60542edace187651d375dc5c"),
+        "studentId" : "6a61b6d9-e408-4535-b0fd-6e5b3e44cbeb",
+        "classDay1" : "2",
+        "classDay2" : "4",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60542edace187651d375dc5d"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60542f2cce187651d375dc61"),
+        "studentId" : "00046a96-f206-4b0f-8ff4-2e2d6828ef6d",
+        "classDay1" : "2",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60542f2cce187651d375dc62"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60542f66ce187651d375dc66"),
+        "studentId" : "440337d1-11e5-4b72-8d65-0903cd8646ea",
+        "classDay1" : "2",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60542f66ce187651d375dc67"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60542fbece187651d375dc6b"),
+        "studentId" : "a2a6ad0e-74b0-430c-b437-042e00230c26",
+        "classDay1" : "2",
+        "classDay2" : "4",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60542fbece187651d375dc6c"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60543032ce187651d375dc70"),
+        "studentId" : "d19475f1-3a4e-46d7-92d0-0e9f41fc1ec8",
+        "classDay1" : "2",
+        "classDay2" : "3",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60543032ce187651d375dc71"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("6054306cce187651d375dc75"),
+        "studentId" : "64b96355-4d5d-4ba5-be0a-d5c229be4f7c",
+        "classDay1" : "2",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("6054306cce187651d375dc76"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("605430c5ce187651d375dc7a"),
+        "studentId" : "cfec4eda-c791-4a1f-acdc-7c7db80da6ba",
+        "classDay1" : "4",
+        "classDay2" : "",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("605430c5ce187651d375dc7b"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60543111ce187651d375dc7f"),
+        "studentId" : "4741dfb4-0479-4b9a-8b02-a6a9fd63eab4",
+        "classDay1" : "2",
+        "classDay2" : "",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60543111ce187651d375dc80"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("6054314fce187651d375dc84"),
+        "studentId" : "7c19b62d-b178-44e0-b873-17088a1dbd36",
+        "classDay1" : "2",
+        "classDay2" : "4",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("6054314fce187651d375dc85"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("6054318dce187651d375dc89"),
+        "studentId" : "351d589e-53f8-4d0d-8265-bd7bf5e5c2d1",
+        "classDay1" : "3",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("6054318dce187651d375dc8a"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("605431d3ce187651d375dc8e"),
+        "studentId" : "ee3c655d-9cd1-46ed-8a55-47b601ee5383",
+        "classDay1" : "3",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("605431d3ce187651d375dc8f"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60543203ce187651d375dc93"),
+        "studentId" : "9dee90e5-9a34-4f2c-b7cf-0c4bb37d94f4",
+        "classDay1" : "3",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60543203ce187651d375dc94"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("6054323fce187651d375dc98"),
+        "studentId" : "7131b7c6-5002-4387-b68d-e9fa2ca2208d",
+        "classDay1" : "2",
+        "classDay2" : "4",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("6054323fce187651d375dc99"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("60543291ce187651d375dc9d"),
+        "studentId" : "768bac40-03aa-4e8b-a6af-544cc78b3ec1",
+        "classDay1" : "2",
+        "classDay2" : "4",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("60543291ce187651d375dc9e"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("6054af1ece187651d375dca2"),
+        "studentId" : "085d5cc5-5b04-45c5-a29e-cdbfc2ce79ac",
+        "classDay1" : "2",
+        "classDay2" : "3",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("6054af1ece187651d375dca3"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("6054af64ce187651d375dca7"),
+        "studentId" : "1505f813-ff0e-4839-ad0f-e1264c5ae4ed",
+        "classDay1" : "3",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("6054af64ce187651d375dca8"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("6054afb1ce187651d375dcac"),
+        "studentId" : "e29d1654-ffbe-4acd-893b-c84ed1262d38",
+        "classDay1" : "3",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("6054afb1ce187651d375dcad"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("6054b00dce187651d375dcb1"),
+        "studentId" : "edcb55c4-4c53-4aa6-a616-c44867f4f8a8",
+        "classDay1" : "2",
+        "classDay2" : "4",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("6054b00dce187651d375dcb2"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("6054b06dce187651d375dcb6"),
+        "studentId" : "92f58fee-a03e-4245-9094-19dda33d64b2",
+        "classDay1" : "2",
+        "classDay2" : "4",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("6054b06dce187651d375dcb7"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("6054b0dace187651d375dcbb"),
+        "studentId" : "8feae2eb-9aa1-412f-afd5-93a16c7847da",
+        "classDay1" : "4",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("6054b0dace187651d375dcbc"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("6054b172ce187651d375dcc0"),
+        "studentId" : "68d05862-6ec9-4ecf-a91c-5be6eb7613e9",
+        "classDay1" : "2",
+        "classDay2" : "4",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("6054b172ce187651d375dcc1"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("6054b1d6ce187651d375dcc5"),
+        "studentId" : "9e3f2368-73fa-4964-89f8-2d07830d1092",
+        "classDay1" : "2",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("6054b1d6ce187651d375dcc6"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("6054b239ce187651d375dcca"),
+        "studentId" : "6fc35150-f9b3-49bd-8ac3-b2deb84a474f",
+        "classDay1" : "2",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("6054b239ce187651d375dccb"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("6054b297ce187651d375dccf"),
+        "studentId" : "7de5b249-b11e-439f-b1f6-79b1e2399832",
+        "classDay1" : "3",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("6054b297ce187651d375dcd0"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("6054b2e3ce187651d375dcd4"),
+        "studentId" : "8c61b691-1214-495e-b455-0d1e407f349b",
+        "classDay1" : "3",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("6054b2e3ce187651d375dcd5"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    },
+    {
+        "_id" : ObjectId("605718bbc8a7a0180c8207d8"),
+        "studentId" : "79cf82bd-9d9d-4b36-9528-5a47058b2f07",
+        "classDay1" : "2",
+        "classDay2" : "5",
+        "checkIn" : [ 
+            {
+                "_id" : ObjectId("605718bbc8a7a0180c8207d9"),
+                "note" : [],
+                "days" : []
+            }
+        ]
+    }
+]

@@ -17,6 +17,11 @@ class ClassOperator {
         return result;
     }
 
+    async updateClassDayByStudentId(studentId, classDay1, classDay2) {
+        const result = await ClassModel.updateOne( {"studentId": studentId}, {classDay1: classDay1, classDay2: classDay2});
+        return result;
+    }
+
     async getCheckInByYearAndMonth(studentId, year, month) {
         const result = await ClassModel.aggregate( [
             { "$match": {"studentId": studentId} },

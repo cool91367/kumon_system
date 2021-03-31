@@ -23,6 +23,10 @@ class ClassSystem {
         return await this.classOperator.getClassDayByStudentId(studentId);
     }
 
+    async changeClassDay(studentId, classDay1, classDay2) {
+        return await this.classOperator.updateClassDayByStudentId(studentId, classDay1, classDay2);
+    }
+
     async getCheckInByYearAndMonth(studentId, year, month) {
         return await this.classOperator.getCheckInByYearAndMonth(studentId, year, month);
     }

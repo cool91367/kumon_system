@@ -108,6 +108,20 @@ router.post('/checkIn/delete', auth, async function(req, res) {
         return res.status(500).send( {err: err.message} );
     }
     return res.status(200).send( {message: "OK"} );
+});
+
+router.post('/classDay/update', auth, async function(req, res) {
+    try {
+        await classSystem.changeClassDay(
+            req.body.studentId,
+            req.body.classDay1,
+            req.body.classDay2
+        );
+    } catch(err) {
+        console.log(err);
+        return res.status(500).send( {err: err.message} );
+    }
+    return res.status(200).send( {message: "OK"} );
 })
 
 module.exports = router;
