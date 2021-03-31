@@ -1,4 +1,5 @@
 const ClassModel = require('../models/classModel');
+const ClassBreakModel = require('../models/classBreakModel');
 
 class ClassOperator {
 
@@ -20,6 +21,40 @@ class ClassOperator {
     async updateClassDayByStudentId(studentId, classDay1, classDay2) {
         const result = await ClassModel.updateOne( {"studentId": studentId}, {classDay1: classDay1, classDay2: classDay2});
         return result;
+    }
+
+    async getBreakDay(teacherId) {
+        const result = await ClassBreakModel.findOne( {"teacherId": teacherId} ).select( {"break": 1});
+        return result;
+    }
+
+    async addBreakDay(teacherId, year, month, day) {
+        const result = await ClassBreakModel.aggregate( [
+            { "$match": {"teacherId": teacherId} },
+            { "$unwind": "$break" },
+            { "$match": {"break.year": year, "break.month": month} }
+        ]);
+        let newBreak = [];
+
+        await ClassBreakModel.updateOne( {"teacherId": teacherId}, {$pull: {break: {
+            year: year,
+            month: month,
+        }}});
+
+        if(result[0]) {
+            for(let i = 0;i < result[0].break.day.length;i++) {
+                if(result[0].break.day[i] !== day) {
+                    newBreak.push(result[0].break.day[i]);
+                }
+            }
+        }
+        newBreak.push(day);
+
+        await ClassBreakModel.updateOne( {"teacherId": teacherId}, {$push: {break: {
+            year: year,
+            month: month,
+            day: newBreak
+        }}});
     }
 
     async getCheckInByYearAndMonth(studentId, year, month) {

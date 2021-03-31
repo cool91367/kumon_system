@@ -24,6 +24,30 @@
             </div>
         </div>
 
+        <div class="modal fade addBreakModal">
+            <div class="modal-dialog ">
+                <div class="modal-content">
+                    <div class="modal-header" style="text-align: center;">
+                        <h2 class="modal-title" style="position: relative;left: 41%;color: yellowgreen;">增加修課日</h2>
+                        <button class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body ">
+                        <form>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">增加休課日:</label>
+                                <input type="text" class="form-control" id="inputBreakYear"  placeholder="請輸入休課年">
+                                <input type="text" class="form-control" id="inputBreakMonth"  placeholder="請輸入休課月">
+                                <input type="text" class="form-control" id="inputBreakDay"  placeholder="請輸入休課日">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" @click="addBreak()">確認送出</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="modal fade changeClassDayModal">
             <div class="modal-dialog loginModal">
                 <div class="modal-content">
@@ -163,6 +187,7 @@
                     <button class="btn btn-danger" data-toggle="modal" data-target=".dayOff" style="margin-left: 10px">請假</button>
                     <button class="btn btn-danger" data-toggle="modal" data-target=".deleteCheckInModal" style="margin-left: 10px">取消打卡</button>
                     <button class="btn btn-warning" data-toggle="modal" data-target=".changeClassDayModal" style="margin-left: 100px">更改上課日</button>
+                    <button class="btn btn-secondary" data-toggle="modal" data-target=".addBreakModal" style="margin-left: 10px">增加休課日</button>
                 </div>
             </div>
         </div>
@@ -192,16 +217,35 @@
                 classDay2: null,
                 checkInInfo: [],
                 dayOffInfo: [],
+                breakDay: null
             }
         },
-        mounted: function() {
+        mounted: async function() {
             let vm = this;
             holder = document.getElementById("days");
             prev = document.getElementById("prev");
             next = document.getElementById("next");
             ctitle = document.getElementById("calendar-title");
             cyear = document.getElementById("calendar-year");
-            refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo);
+
+            await $.ajax({
+                type: "GET",
+                url: "/class/breakDay/" + this.$store.state.userInfo.account,
+                dataType: "json",
+                headers : {
+                    "Authorization": Cookies.get("jwtToken")
+                },
+                success: function(response) {
+                    vm.breakDay = response.break;
+                    refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo, vm.breakDay);
+                },
+                error: function(err) {
+                    alert({err: err.message});
+                    return
+                }
+            });
+
+            refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo, vm.breakDay);
             prev.onclick = async function(e){
                 e.preventDefault();
                 my_month--;
@@ -218,7 +262,7 @@
                     },
                     success: function(response) {
                         vm.checkInInfo = response;
-                        refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo);
+                        refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo, vm.breakDay);
                     },
                     error: function(err) {
                         alert({err: err.message});
@@ -241,7 +285,7 @@
                         return
                     }
                 });
-                refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo);
+                refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo, vm.breakDay);
             }
             next.onclick = async function(e){
                 e.preventDefault();
@@ -259,7 +303,7 @@
                     },
                     success: function(response) {
                         vm.checkInInfo = response;
-                        refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo);
+                        refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo, vm.breakDay);
                     },
                     error: function(err) {
                         alert({err: err.message});
@@ -282,10 +326,62 @@
                         return
                     }
                 });
-                refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo);
+                refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo, vm.breakDay);
             }
         },
         methods: {
+            addBreak() {
+                let vm = this;
+
+                // 同時兼容西元年及民國年
+                let breakDayYear = $('#inputBreakYear').val();
+                breakDayYear = parseInt(breakDayYear);
+                breakDayYear = breakDayYear < 1000? breakDayYear + 1911 : breakDayYear;
+
+                $.ajax({
+                    type: "POST",
+                    url: "/class/breakDay",
+                    dataType: "json",
+                    headers : {
+                        "Authorization": Cookies.get("jwtToken")
+                    },
+                    data: {
+                        teacherId: this.$store.state.userInfo.account, 
+                        year: breakDayYear.toString(),
+                        month: $('#inputBreakMonth').val(),
+                        day: $('#inputBreakDay').val()
+                    },
+                    success: function(response) {
+                        alert("增加成功");
+                        $('#inputBreakYear').val("");
+                        $('#inputBreakMonth').val("");
+                        $('#inputBreakDay').val("");
+                        $('.addBreakModal').modal('hide');
+
+                        $.ajax({
+                            type: "GET",
+                            url: "/class/breakDay/" + vm.$store.state.userInfo.account,
+                            dataType: "json",
+                            headers : {
+                                "Authorization": Cookies.get("jwtToken")
+                            },
+                            success: function(response) {
+                                vm.breakDay = response.break;
+                                refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo, vm.breakDay);
+                            },
+                            error: function(err) {
+                                alert({err: err.message});
+                                return
+                            }
+                        });
+                    },
+                    error: function(err) {
+                        alert({err: err.message});
+                        return
+                    }
+                });
+            },
+
             changeClassDay() {
                 let vm = this;
 
@@ -316,7 +412,7 @@
                             success: function(response) {
                                 vm.classDay1 = response.classDay1;
                                 vm.classDay2 = response.classDay2;
-                                refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo);
+                                refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo, vm.breakDay);
                             },
                             error: function(err) {
                                 alert({err: err.message});
@@ -411,7 +507,7 @@
                             },
                             success: function(response) {
                                 vm.checkInInfo = response;
-                                refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo);
+                                refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo, vm.breakDay);
                             },
                             error: function(err) {
                                 alert({err: err.message});
@@ -461,7 +557,7 @@
                             },
                             success: function(response) {
                                 vm.checkInInfo = response;
-                                refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo);
+                                refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo, vm.breakDay);
                             },
                             error: function(err) {
                                 alert({err: err.message});
@@ -531,7 +627,7 @@
                     },
                     success: function(response) {
                         vm.checkInInfo = response;
-                        refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo);
+                        refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo, vm.breakDay);
                     },
                     error: function(err) {
                         alert({err: err.message});
@@ -599,7 +695,7 @@
                             },
                             success: function(response) {
                                 vm.checkInInfo = response;
-                                refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo);
+                                refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo, vm.breakDay);
                             },
                             error: function(err) {
                                 alert({err: err.message});
@@ -626,13 +722,21 @@
         return false
     }
 
-    function refreshDate(day1, day2, checkInArr){
+    function refreshDate(day1, day2, checkInArr, breakDay){
                 var str = "";
                 var totalDay = daysMonth(my_month, my_year); //获取该月总天数
                 var firstDay = dayStart(my_month, my_year); //获取该月第一天是星期几
                 let weekDay = firstDay;
                 let classCount = 0;
+                let thisMonthBreakDay = [];
                 var myclass;
+
+                for(let i = 0; i < breakDay.length;i++) {
+                    if(breakDay[i].month == (my_month+1).toString() && breakDay[i].year == my_year.toString()) {
+                        thisMonthBreakDay = breakDay[i].day
+                    }
+                }
+
                 for(var i=1; i<firstDay; i++){ 
                     str += "<li></li>"; //为起始日之前的日期创建空白节点
                 }
@@ -642,8 +746,18 @@
                         classCount++;
                     }
                     else if (weekDay == day1 || weekDay == day2){
-                        if(classCount < 8){
-                            console.log(classCount, i);
+                        let isBreak = false;
+                        for(let j = 0;j < thisMonthBreakDay.length;j++) { //確認是否為休課日
+                            if(i.toString() == thisMonthBreakDay[j]) {
+                                isBreak = true;
+                                break;
+                            }
+                        }
+
+                        if(isBreak) {
+                            myclass = " class='darkgrey'";
+                        }
+                        else if(classCount < 8){
                             myclass = " class='red redbox'";//應該上課日
                             classCount++;
                         }

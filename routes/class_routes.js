@@ -122,6 +122,32 @@ router.post('/classDay/update', auth, async function(req, res) {
         return res.status(500).send( {err: err.message} );
     }
     return res.status(200).send( {message: "OK"} );
+});
+
+router.post('/breakDay', auth, async function(req, res) {
+    try {
+        await classSystem.addBreakDay(
+            req.body.teacherId,
+            req.body.year,
+            req.body.month,
+            req.body.day
+        );
+    } catch(err) {
+        console.log(err);
+        return res.status(500).send( {err: err.message} );
+    }
+    return res.status(200).send( {message: "OK"} );
+});
+
+router.get('/breakDay/:teacherId', auth, async function(req, res) {
+    let result = null;
+    try {
+        result = await classSystem.getBreakDay(req.params.teacherId);
+    } catch(err) {
+        console.log(err);
+        return res.status(500).send( {err: err.message} );
+    }
+    return res.status(200).send( result );
 })
 
 module.exports = router;

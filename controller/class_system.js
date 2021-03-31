@@ -19,6 +19,14 @@ class ClassSystem {
         return await this.classOperator.addDayOff(studentId, year, month, day, reason);
     }
 
+    async addBreakDay(teacherId, year, month, day) {
+        return await this.classOperator.addBreakDay(teacherId, year, month, day);
+    }
+
+    async getBreakDay(teacherId) {
+        return await this.classOperator.getBreakDay(teacherId);
+    }
+
     async getClassDay(studentId) {
         return await this.classOperator.getClassDayByStudentId(studentId);
     }
