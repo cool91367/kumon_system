@@ -282,7 +282,6 @@ class ClassOperator {
 
         if(oldData[0].checkIn){
             for(let i = 0;i < oldData[0].checkIn.days.length;i++) {
-                console.log(oldData[0].checkIn.days[i])
                 if(oldData[0].checkIn.days[i].actualDay == day) {
                     continue;
                 }

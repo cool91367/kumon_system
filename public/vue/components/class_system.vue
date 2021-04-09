@@ -127,10 +127,19 @@
 
         <div class="row" style="height: 100%;">
             <div v-if="$store.state.isTeacher" class="col-2 studentList" style="background-color: #ABDCFF;height: 100%; overflow: auto;position: relative;" >
+                <a @click="showTodayStudent = false" href="#">顯示全部</a>
+                <a @click="showTodayStudent = true" href="#">顯示今天</a>
                 <br>
-                <ul v-for="(student, idx) in $store.state.userInfo.studentList" :key="idx">
-                    <li v-if="student.enrollState == 1" class="studentConnect" style="display: inline;" :id="student.studentId"  @click="getStudentInfo($event)"><a>{{idx+1}}. {{ student.studentName }}</a></li>
-                </ul>
+                <div v-if="!showTodayStudent" class="studentList">
+                    <ul v-for="(student, idx) in $store.state.userInfo.studentList" :key="idx">
+                        <li v-if="student.enrollState == 1" class="studentConnect" style="display: inline;" :id="student.studentId"  @click="getStudentInfo($event)"><a>{{idx+1}}. {{ student.studentName }}</a></li>
+                    </ul>
+                </div>
+                <div v-if="showTodayStudent" class="studentList">
+                    <ul v-for="(student, idx) in todayStudent" :key="idx">
+                        <li v-if="student.enrollState == 1" class="studentConnect" style="display: inline;" :id="student.studentId"  @click="getStudentInfo($event)"><a>{{idx+1}}. {{ student.studentName }}</a></li>
+                    </ul>
+                </div>
             </div>
 
             <div class="bodyArea" :class="{ 'col-10': $store.state.isTeacher, 'col-12': !$store.state.isTeacher }" style="height: 100%;">
@@ -213,10 +222,12 @@
             return {
                 inputNewStudent: false,
                 chosenStudent: false,
+                showTodayStudent: false,
                 classDay1: null,
                 classDay2: null,
                 checkInInfo: [],
                 dayOffInfo: [],
+                todayStudent: [],
                 breakDay: null
             }
         },
@@ -327,6 +338,26 @@
                     }
                 });
                 refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo, vm.breakDay);
+            }
+            const weekDay = new Date().getDay();
+            for(let i = 0;i < vm.$store.state.userInfo.studentList.length;i++) {
+                await $.ajax({
+                    type: "GET",
+                    url: "/class/" + vm.$store.state.userInfo.studentList[i].studentId + "/classDay",
+                    dataType: "json",
+                    headers : {
+                        "Authorization": Cookies.get("jwtToken")
+                    },
+                    success: function(response) {
+                        if(response.classDay1 == weekDay || response.classDay2 == weekDay) {
+                            vm.todayStudent.push(vm.$store.state.userInfo.studentList[i]);
+                        }
+                    },
+                    error: function(err) {
+                        alert({err: err.message});
+                        return
+                    }
+                });
             }
         },
         methods: {
@@ -508,6 +539,9 @@
                             success: function(response) {
                                 vm.checkInInfo = response;
                                 refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo, vm.breakDay);
+
+                                // 更改studentList的樣式
+                                $('.studentList #' + vm.chosenStudent.id).css('color', 'green');
                             },
                             error: function(err) {
                                 alert({err: err.message});
@@ -565,6 +599,9 @@
                             }
                         });
                         $('.deleteCheckInModal').modal('hide');
+
+                        // 更改studentList的樣式
+                        $('.studentList #' + vm.chosenStudent.id).css('color', 'black');
                     },
                     error: function(err) {
                         alert({err: err.message});
