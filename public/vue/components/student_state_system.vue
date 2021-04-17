@@ -21,7 +21,7 @@
                         <br>
                         <h4>學生帳號: {{chosenStudent.id}}</h4>
                         <br>
-                        <h4>入會學年: {{chosenStudent.grade}}</h4>
+                        <h4>入會時間: {{chosenStudent.grade}}</h4>
                         <br>
                         <h4>入會學年: {{chosenStudent.grade}}</h4>
                         <br>
@@ -95,7 +95,6 @@
             }
         },
         methods: {
-
             async getStudentInfo(event) {
                 this.inputNewStudent = false;
                 const studentId = event.currentTarget.id;
