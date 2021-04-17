@@ -4,6 +4,7 @@ const classSchema = new Schema({
     studentId: String,
     classDay1: String,
     classDay2: String,
+    classTime: String,
     checkIn:[{
         year: String,
         month: String,

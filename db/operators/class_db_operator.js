@@ -8,6 +8,7 @@ class ClassOperator {
             studentId: student.account,
             classDay1: student.classDay1,
             classDay2: student.classDay2,
+            classTime: student.classTime,
             checkIn: [{}]
         });
         await newStudent.save();
@@ -297,6 +298,15 @@ class ClassOperator {
             "note": oldData[0].checkIn.note? oldData[0].checkIn.note : [],
             "days": newCheckInArr,
         }}});
+    }
+
+    async updateClassTime(studentId, newTime) {
+        await ClassModel.updateOne( {"studentId": studentId }, { $set: { classTime: newTime} });
+    }
+
+    async getClassTime(studentId) {
+        const result = await ClassModel.findOne( {"studentId": studentId} ).select( {"classTime": 1});
+        return result;
     }
 }
 

@@ -4,17 +4,30 @@
             <div class="modal-dialog loginModal">
                 <div class="modal-content">
                     <div class="modal-header" style="text-align: center;">
-                        <h2 class="modal-title" style="position: relative;left: 41%;color: yellowgreen;">補打卡</h2>
+                        <h2 class="modal-title" style="position: relative;left: 40%;color: yellowgreen;">補打卡</h2>
                         <button class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body loginBody">
                         <form>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">應該上課日:</label>
-                                <input type="text" class="form-control" id="inputMakeUpYear"  placeholder="請輸入應該上課年">
-                                <input type="text" class="form-control" id="inputMakeUpMonth"  placeholder="請輸入應該上課月">
-                                <input type="text" class="form-control" id="inputMakeUpDay"  placeholder="請輸入應該上課日">
+                                <label for="exampleInputEmail1">應上課日:</label>
+                                <input type="text" class="form-control" id="inputMakeUpYear" style="display: inline;"  placeholder="請輸入補上課年">
+                                <input type="text" class="form-control" id="inputMakeUpMonth" style="display: inline;"  placeholder="請輸入補上課月">
+                                <input type="text" class="form-control" id="inputMakeUpDay" style="display: inline;"  placeholder="請輸入補上課日">
                             </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">實際上課日:</label>
+                                <input type="text" class="form-control" id="inputActualYear" style="display: inline;"  placeholder="請輸入實際上課年">
+                                <input type="text" class="form-control" id="inputActualMonth" style="display: inline;"  placeholder="請輸入實際上課月">
+                                <input type="text" class="form-control" id="inputActualDay" style="display: inline;"  placeholder="請輸入實際上課日">
+                            </div>
+                            <form class="form-inline">
+                                <div class="form-group" style="display: inline;">
+                                    <label for="exampleInputEmail1">上課時間:</label>
+                                    <input type="text" class="form-control" id="inputHour">：
+                                    <input type="text" class="form-control" id="inputMinute">
+                                </div>
+                            </form>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -24,11 +37,36 @@
             </div>
         </div>
 
+        <div class="modal fade changeClassTimeModal">
+            <div class="modal-dialog loginModal">
+                <div class="modal-content">
+                    <div class="modal-header" style="text-align: center;">
+                        <h2 class="modal-title" style="position: relative;left: 30%;color: yellowgreen;">更改上課時間</h2>
+                        <button class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body loginBody">
+                        <form>
+                            <form class="form-inline">
+                                <div class="form-group" style="display: inline;">
+                                    <label for="exampleInputEmail1">上課時間:</label>
+                                    <input type="text" class="form-control" id="inputClassTimeHour">：
+                                    <input type="text" class="form-control" id="inputClassTimeMinute">
+                                </div>
+                            </form>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" @click="changeClassTime()">確認送出</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="modal fade addBreakModal">
             <div class="modal-dialog ">
                 <div class="modal-content">
                     <div class="modal-header" style="text-align: center;">
-                        <h2 class="modal-title" style="position: relative;left: 41%;color: yellowgreen;">增加修課日</h2>
+                        <h2 class="modal-title" style="position: relative;left: 30%;color: yellowgreen;">增加修課日</h2>
                         <button class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body ">
@@ -52,7 +90,7 @@
             <div class="modal-dialog loginModal">
                 <div class="modal-content">
                     <div class="modal-header" style="text-align: center;">
-                        <h2 class="modal-title" style="position: relative;left: 41%;color: yellowgreen;">更改上課日</h2>
+                        <h2 class="modal-title" style="position: relative;left: 30%;color: yellowgreen;">更改上課日</h2>
                         <button class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
@@ -176,6 +214,9 @@
 
                         <div class="col-4">
                             <div>
+                                <h3>到班時間：{{classTime}}</h3>
+                            </div>
+                            <div>
                                 <h3>打卡資訊</h3>
                                 <div v-for="(checkIn, idx) in checkInInfo" :key="idx">
                                     <p v-if="!checkIn.makeUp">{{checkIn.actualDay + '號'}}到班時間: {{checkIn.time}}</p>
@@ -196,6 +237,7 @@
                     <button class="btn btn-danger" data-toggle="modal" data-target=".dayOff" style="margin-left: 10px">請假</button>
                     <button class="btn btn-danger" data-toggle="modal" data-target=".deleteCheckInModal" style="margin-left: 10px">取消打卡</button>
                     <button class="btn btn-warning" data-toggle="modal" data-target=".changeClassDayModal" style="margin-left: 100px">更改上課日</button>
+                    <button class="btn btn-warning" data-toggle="modal" data-target=".changeClassTimeModal" style="margin-left: 10px">更改上課時間</button>
                     <button class="btn btn-secondary" data-toggle="modal" data-target=".addBreakModal" style="margin-left: 10px">增加休課日</button>
                 </div>
             </div>
@@ -225,6 +267,7 @@
                 showTodayStudent: false,
                 classDay1: null,
                 classDay2: null,
+                classTime: null,
                 checkInInfo: [],
                 dayOffInfo: [],
                 todayStudent: [],
@@ -361,7 +404,7 @@
             }
         },
         methods: {
-            addBreak() {
+            async addBreak() {
                 let vm = this;
 
                 // 同時兼容西元年及民國年
@@ -413,7 +456,7 @@
                 });
             },
 
-            changeClassDay() {
+            async changeClassDay() {
                 let vm = this;
 
                 $.ajax({
@@ -458,7 +501,7 @@
                 });
             },
 
-            dayOff() {
+            async dayOff() {
                 let vm = this;
 
                 // 同時兼容西元年及民國年
@@ -529,6 +572,24 @@
                     },
                     success: function(response) {
                         alert("打卡成功");
+                        let nowMinute = my_date.getMinutes();
+                        if(nowMinute < 10) {
+                            nowMinute = '0' + nowMinute.toString();
+                        }
+                        else {
+                            nowMinute = nowMinute.toString();
+                        }
+
+                        // 確認上課時間是否正常
+                        const nowTime = parseInt(my_date.getHours().toString() + nowMinute);
+                        const classTime = parseInt(vm.classTime.split(':')[0] + vm.classTime.split(':')[1]);
+                        if(nowTime - classTime > 30) {
+                            alert("遲到囉!!!")
+                        }
+                        if(classTime - nowTime > 50) {
+                            alert("太早來囉!!!")
+                        }
+
                         $.ajax({
                             type: "GET",
                             url: "/class/" + vm.chosenStudent.id + "/" + my_year + "/" + (my_month + 1) + "/checkIn",
@@ -687,6 +748,70 @@
                         vm.dayOffInfo = response;
                     }
                 });
+
+                await $.ajax({
+                    type: "GET",
+                    url: "/class/" + vm.chosenStudent.id + "/classTime",
+                    dataType: "json",
+                    headers : {
+                        "Authorization": Cookies.get("jwtToken")
+                    },
+                    error: function(err) {
+                        console.log("err", err);
+                        alert({err: err})
+                    },
+                    success: function(response) {
+                        vm.classTime = response.classTime;
+                    }
+                });
+            },
+
+            async changeClassTime() {
+                let vm = this;
+                let minute = parseInt($('#inputClassTimeMinute').val())
+                if(minute < 10) {
+                    minute = '0' + minute.toString()
+                }
+                else {
+                    minute = minute.toString()
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "/class/classTime/update",
+                    dataType: "json",
+                    headers : {
+                        "Authorization": Cookies.get("jwtToken")
+                    },
+                    data: {
+                        studentId: vm.chosenStudent.id,
+                        newTime: $('#inputClassTimeHour').val() + ":" + minute
+                    },
+                    success: async function(response) {
+                        alert("更換時間成功");
+                        $('#inputClassTimeHour').val("");
+                        $('#inputClassTimeMinute').val("");
+                        $('.changeClassTimeModal').modal('hide');
+                        await $.ajax({
+                            type: "GET",
+                            url: "/class/" + vm.chosenStudent.id + "/classTime",
+                            dataType: "json",
+                            headers : {
+                                "Authorization": Cookies.get("jwtToken")
+                            },
+                            error: function(err) {
+                                console.log(err);
+                                alert({err: err})
+                            },
+                            success: function(response) {
+                                vm.classTime = response.classTime;
+                            }
+                        });
+                    },
+                    error: function(err) {
+                        alert({err: err.message});
+                        return
+                    }
+                });
             },
             
             showInputNewStudent() {
@@ -696,7 +821,6 @@
 
             makeUp() {
                 let vm = this;
-                const my_date = new Date();
                 // 同時兼容西元年及民國年
                 let makeUpYear = $('#inputMakeUpYear').val();
                 makeUpYear = parseInt(makeUpYear);
@@ -714,14 +838,36 @@
                         year: makeUpYear.toString(), 
                         month: $('#inputMakeUpMonth').val(), 
                         actualDay: $('#inputMakeUpDay').val(),
-                        makeUpDay:  my_date.getFullYear().toString() + '/' + (my_date.getMonth() + 1).toString() + '/' +  my_date.getDate().toString(),
-                        time: my_date.getHours().toString() + ":" + my_date.getMinutes().toString()
+                        makeUpDay:  $('#inputActualYear').val() + '/' + $('#inputActualMonth').val() + '/' + $('#inputActualDay').val(),
+                        time: $('#inputHour').val() + ":" +$('#inputMinute').val()
                     },
                     success: function(response) {
-                        alert("打卡成功");
+                        alert("補打卡成功");
+                        let my_date_minute = parseInt($('#inputMinute').val());
+                        if(my_date_minute < 10) {
+                            my_date_minute = '0' + my_date_minute.toString();
+                        }
+                        else {
+                            my_date_minute = my_date_minute.toString();
+                        }
+
+                        // 確認上課時間是否正常
+                        const nowTime = parseInt($('#inputHour').val() + my_date_minute);
+                        const classTime = parseInt(vm.classTime.split(':')[0] + vm.classTime.split(':')[1]);
+                        if(nowTime - classTime > 30) {
+                            alert("遲到囉!!!")
+                        }
+                        if(classTime - nowTime > 50) {
+                            alert("太早來囉!!!")
+                        }
                         $('#inputMakeUpDay').val("");
                         $('#inputMakeUpMonth').val("");
                         $('#inputMakeUpYear').val("");
+                        $('#inputActualYear').val("");
+                        $('#inputActualMonth').val("");
+                        $('#inputActualDay').val("");
+                        $('#inputHour').val("");
+                        $('#inputMinute').val("");
                         $('.makeUp').modal('hide');
                         $.ajax({
                             type: "GET",
@@ -810,17 +956,17 @@
                         for(let j = 0;j < checkInArr.length;j++) {
                             if(checkInArr[j].actualDay == i) {
                                 if(checkInArr[j].makeUp) {
-                                    str += "<li"+" style='border:1px solid #F28500;color: #996B1F; background: #FFD700'>"+ i + "</li>"; //创建日期节点
+                                    str += "<li"+" style='border:1px solid #F28500;color: #996B1F; background: #FFD700; font-size:18px;'>"+ i + "</li>"; //创建日期节点
                                 }
                                 else {
-                                    str += "<li"+myclass+">"+ i +"</li>"; //创建日期节点
+                                    str += "<li"+myclass+" style='font-size:18px;'>"+ i +"</li>"; //创建日期节点
                                 }
                                 break;
                             }
                         }
                     }
                     else{
-                        str += "<li"+myclass+">"+i +"</li>"; //创建日期节点
+                        str += "<li"+myclass+" style='font-size:18px;'>"+i +"</li>"; //创建日期节点
                     }
 
                     weekDay++;

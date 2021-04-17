@@ -46,6 +46,14 @@ class ClassSystem {
     async deleteCheckInByYearAndMonthAndDay(studentId, year, month, day) {
         return await this.classOperator.deleteCheckInByStudentId(studentId, year, month, day);
     }
+
+    async changeClassTime(studentId, newTime) {
+        return await this.classOperator.updateClassTime(studentId, newTime);
+    }
+
+    async getClassTime(studentId) {
+        return await this.classOperator.getClassTime(studentId);
+    }
 }
 
 module.exports = ClassSystem

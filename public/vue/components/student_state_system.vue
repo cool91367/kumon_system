@@ -23,6 +23,8 @@
                         <br>
                         <h4>入會學年: {{chosenStudent.grade}}</h4>
                         <br>
+                        <h4>入會學年: {{chosenStudent.grade}}</h4>
+                        <br>
                         <h4>未回覆訊息: {{chosenStudent.unReadMessage}}</h4>
                         <br><br>
                         <button class="btn btn-danger" @click="unenroll()">退會</button>

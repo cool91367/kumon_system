@@ -40,8 +40,8 @@
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">年/月/日</th>
-                        <th scope="col">目前學年</th>
-                        <th scope="col">目前教材</th>
+                        <th scope="col">學年</th>
+                        <th scope="col">教材</th>
                         <th scope="col">科目</th>
                         <th scope="col">時間</th>
                         <th scope="col">正確率</th>

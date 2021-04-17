@@ -148,6 +148,33 @@ router.get('/breakDay/:teacherId', auth, async function(req, res) {
         return res.status(500).send( {err: err.message} );
     }
     return res.status(200).send( result );
+});
+
+router.get('/:studentId/classTime', auth, async function(req, res) {
+    let result = null;
+    try {
+        result = await classSystem.getClassTime(req.params.studentId);
+    } catch(err) {
+        console.log(err);
+        return res.status(500).send( {err: err.message} );
+    }
+    if(!result.classTime) {
+        result.classTime = "00:00";
+    }
+    return res.status(200).send( result );
+});
+
+router.post('/classTime/update', auth, async function(req, res) {
+    try {
+        await classSystem.changeClassTime(
+            req.body.studentId,
+            req.body.newTime,
+        );
+    } catch(err) {
+        console.log(err);
+        return res.status(500).send( {err: err.message} );
+    }
+    return res.status(200).send( {message: "OK"} );
 })
 
 module.exports = router;
