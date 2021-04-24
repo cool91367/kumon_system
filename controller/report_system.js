@@ -60,6 +60,36 @@ class ReportSystem {
         await this.reportOperator.addProgress(year, month, progresses);
     }
 
+    async updateOneProgress(studentId, year, month, math, chinese, english, grade) {
+        let progress = {}
+        if(math) {
+            progress.math = replaceSubjectTitle(math);
+            progress.mathI = operateILine(ILine[grade][month.toString()], progress.math);
+        }
+        else{
+            progress.math = "";
+            progress.mathI = "";
+        }
+        if(chinese) {
+            progress.chinese = replaceSubjectTitle(chinese);
+            progress.chineseI = operateILine(ILine[grade][month.toString()], progress.chinese);
+        }
+        else{
+            progress.chinese = "";
+            progress.chineseI = "";
+        }
+        if(english) {
+            progress.english = replaceSubjectTitle(english);
+            progress.englishI = operateILine(ILine[grade][month.toString()], progress.english);
+        }
+        else {
+            progress.english = "";
+            progress.englishI = "";
+        }
+        progress.ILine = ILine[grade][month.toString()];
+        await this.reportOperator.updateProgressByStudentId(studentId, year, month, progress, grade);
+    }
+
     async getStudentReport(studentId) {
         const result = await this.reportOperator.getReportByStudentId(studentId);
         return result;

@@ -25,6 +25,24 @@ router.post('/progress/new', auth, async function(req, res) {
     return res.status(200).send( {message: "OK"} );
 });
 
+router.post('/progress/update', auth, async function(req, res) {
+    try {
+        await reportSystem.updateOneProgress(
+            req.body.studentId,
+            req.body.year,
+            req.body.month,
+            req.body.math,
+            req.body.chinese,
+            req.body.english,
+            req.body.grade
+        );
+    } catch(err) {
+        console.log(err);
+        return res.status(500).send( {err: err.message} );
+    }
+    return res.status(200).send( {"message": "OK"} )
+});
+
 router.get('/:studentId', auth, async function(req, res) {
     let result = null;
     try {

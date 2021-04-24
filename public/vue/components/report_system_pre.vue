@@ -1,5 +1,32 @@
 <template>
     <div v-if="show">
+        <div class="modal fade updateRecordModal">
+            <div class="modal-dialog loginModal">
+                <div class="modal-content">
+                    <div class="modal-header" style="text-align: center;">
+                        <h2 class="modal-title" style="position: relative;left: 30%;color: yellowgreen;">更改學生進度</h2>
+                        <button class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body loginBody">
+                        <form>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">更改紀錄:</label>
+                                <input type="text" class="form-control" id="inputRecordYear"  placeholder="請輸入年">
+                                <input type="text" class="form-control" id="inputRecordMonth"  placeholder="請輸入月">
+                                <input type="text" class="form-control" id="inputRecordGrade"  placeholder="請輸入年級">
+                                <input type="text" class="form-control" id="inputRecordMath"  placeholder="請輸入數學進度">
+                                <input type="text" class="form-control" id="inputRecordChinese"  placeholder="請輸入國語進度">
+                                <input type="text" class="form-control" id="inputRecordEnglish"  placeholder="請輸入英文進度">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" @click="changeOneRecord()">確認送出</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <h3>{{student.studentName}}</h3>
         <br>
         <div>
@@ -42,6 +69,7 @@
                 </tbody>
             </table>
         </div>
+        <button class="btn btn-success" data-toggle="modal" data-target=".updateRecordModal" style="margin-left: 10px">更改學生進度</button>
     </div>
 </template>
 <script>
@@ -109,6 +137,64 @@ module.exports = {
         }
     },
     methods: {
+        changeOneRecord() {
+            let vm = this;
+            $.ajax({
+                type: "POST",
+                url: "/report/progress/update",
+                dataType: "json",
+                headers : {
+                    "Authorization": Cookies.get("jwtToken")
+                },
+                data: {
+                    studentId: this.student.studentId,
+                    year: $('#inputRecordYear').val(),
+                    month: $('#inputRecordMonth').val(),
+                    grade: $('#inputRecordGrade').val(),
+                    math: $('#inputRecordMath').val(),
+                    chinese: $('#inputRecordChinese').val(),
+                    english: $('#inputRecordEhglish').val(),
+                },
+                success: function() {
+                    alert("更改成功");
+                    $('#inputRecordYear').val("");
+                    $('#inputRecordMonth').val("");
+                    $('#inputRecordGrade').val("");
+                    $('#inputRecordMath').val("");
+                    $('#inputRecordChinese').val("");
+                    $('#inputRecordEnglish').val("");
+                    $('.updateRecordModal').modal('hide');
+                    $.ajax({
+                        type: "GET",
+                        url: "/report/" + vm.student.studentId,
+                        dataType: "json",
+                        headers : {
+                            "Authorization": Cookies.get("jwtToken")
+                        },
+                        success: function(response) {
+                            if(response.progress.length > 6) {
+                                vm.chosenStudentRecordPre = response.progress.slice(response.progress.length - 6, response.progress.length);
+                                vm.chosenStudentRecordPreCurrent = response.progress.length - 6;
+                            }
+                            else {
+                                vm.chosenStudentRecordPre = response.progress
+                                vm.chosenStudentRecordPreCurrent = 0;
+                            }
+                            vm.studentRecord = response;
+                        },
+                        error: function(err) {
+                            alert({err: err.message});
+                            return
+                        }
+                    });
+                },
+                error: function(err) {
+                    alert({err: err.message});
+                    return
+                }
+            });
+        },
+
         preLast() {
             if(this.chosenStudentRecordPreCurrent < 6 && this.chosenStudentRecordPreCurrent > 0) {
                 this.chosenStudentRecordPre = this.studentRecord.progress.slice(0, this.chosenStudentRecordPreCurrent);

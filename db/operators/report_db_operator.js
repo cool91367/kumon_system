@@ -124,6 +124,29 @@ class ReportOperator {
         return result[0];
     }
 
+    async updateProgressByStudentId(studentId, year, month, progress, grade) {
+        const oldRecord = await ReportModel.findOne( {"studentId": studentId} );
+        let isNew = true;
+        let progresses = oldRecord.progress;
+        for(let i = 0;i < progresses.length;i++) {
+            if(progresses[i].year == year && progresses[i].month == month) {
+                progresses[i].progress = progress;
+                isNew = false;
+                break;
+            }
+        }
+        if(isNew) {
+            let newRecord = {
+                "progress": progress,
+                "grade": grade,
+                "year": year,
+                "month": month
+            };
+            progresses.push(newRecord);
+        }
+        await ReportModel.updateOne( {"studentId": studentId}, {"progress": progresses, "grade": grade});
+    }
+
 }
 
 module.exports = ReportOperator;
