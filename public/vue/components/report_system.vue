@@ -190,7 +190,6 @@
                     try{
                         while(sheet['A'+studentNameNum.toString()]) {
                             if(count == 0) {
-                                console.log(sheet['A' + studentNameNum.toString()])
                                 studentName = sheet['A' + studentNameNum.toString()].v;
                                 studentGrade = sheet['B' + studentNameNum.toString()].v;
                                 if(sheet['F' + (studentNameNum + count).toString()]) {
@@ -242,6 +241,9 @@
                 let notComplete = false;
                 let notCompleteStudentString = "";
                 for(record in this.newRecord) {
+                    if(this.newRecord[record].enrollState == 2) {
+                        continue;
+                    }
                     // 檢查是否都有輸入到進度
                     if( !this.newRecord[record].mathProgress && !this.newRecord[record].chineseProgress && !this.newRecord[record].englishProgress && this.newRecord[record].enrollState == 1) {
                         notComplete = true;
