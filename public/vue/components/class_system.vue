@@ -271,7 +271,8 @@
                 checkInInfo: [],
                 dayOffInfo: [],
                 todayStudent: [],
-                breakDay: null
+                breakDay: null,
+                checkInList: []
             }
         },
         mounted: async function() {
@@ -281,6 +282,13 @@
             next = document.getElementById("next");
             ctitle = document.getElementById("calendar-title");
             cyear = document.getElementById("calendar-year");
+
+
+            // 將已打卡的學生反綠
+            let checkInList = JSON.parse(Cookies.get('checkInList'));
+            for(let i = 0;i < checkInList.length;i++) {
+                $('.studentList #' + checkInList[i]).css('color', 'green');
+            }
 
             await $.ajax({
                 type: "GET",
@@ -602,6 +610,9 @@
                                 refreshDate(vm.classDay1, vm.classDay2, vm.checkInInfo, vm.breakDay);
 
                                 // 更改studentList的樣式
+                                vm.checkInList.push(vm.chosenStudent.id);
+                                Cookies.set('checkInList', JSON.stringify(vm.checkInList), { expires: 0.5 });
+                                let checkInList = JSON.parse(Cookies.get('checkInList'));
                                 $('.studentList #' + vm.chosenStudent.id).css('color', 'green');
                             },
                             error: function(err) {
@@ -643,6 +654,12 @@
                         $('#deleteCheckInYear').val("");
                         $('#deleteCheckInMonth').val("");
                         $('#deleteCheckInDay').val("");
+
+                        // 更改studentList的樣式
+                        vm.checkInList = vm.checkInList.filter((item) => item != vm.chosenStudent.id);
+                        Cookies.set('checkInList', JSON.stringify(vm.checkInList), { expires: 0.5 });
+                        $('.studentList #' + vm.chosenStudent.id).css('color', 'black');
+
                         $.ajax({
                             type: "GET",
                             url: "/class/" + vm.chosenStudent.id + "/" + my_year + "/" + (my_month + 1) + "/checkIn",
