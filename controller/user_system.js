@@ -82,6 +82,10 @@ class UserSystem {
     async setStudentEnrollState(account, studentId, state) {
         return await this.userOperator.updateStudentEnrollState(account, studentId, state);
     }
+
+    async getStudentByAccount(account) {
+        return await this.userOperator.getUserByAccount(account);
+    }
 }
 
 module.exports = UserSystem

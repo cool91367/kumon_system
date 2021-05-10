@@ -38,6 +38,11 @@ class UserOperator {
         return result
     }
 
+    async getUserByAccount(account) {
+        const result = await UserModel.findOne({"account": account} );
+        return result
+    }
+
     async updateStudentEnrollState(account, studentId, state) {
         const result = await UserModel.updateOne( {"account": account, "studentList.studentId": studentId}, { '$set': {'studentList.$.enrollState': state} })
         return result

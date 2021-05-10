@@ -89,6 +89,20 @@ router.get('/:teacherAccount/studentList', auth, async function(req, res) {
     return res.status(200).send(studentList);
 });
 
+router.get('/student/:studentAccount', auth, async function(req, res) {
+    if(req.userInfo.privil < 2) {
+        return res.status(404).send( { err: "auth error" } );
+    }
+
+    try {
+        studentInfo = await userSystem.getStudentByAccount(req.params.studentAccount);
+    } catch(err) {
+        console.log(err);
+        return res.status(500).send( {err: err.message} );
+    }
+    return res.status(200).send(studentInfo);
+})
+
 router.post('/student/enroll_state/update', auth, async function(req, res) {
     if(req.userInfo.privil < 2) {
         return res.status(404).send( { err: "auth error" } );

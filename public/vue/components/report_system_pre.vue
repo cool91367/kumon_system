@@ -69,7 +69,7 @@
                 </tbody>
             </table>
         </div>
-        <button class="btn btn-success" data-toggle="modal" data-target=".updateRecordModal" style="margin-left: 10px">更改學生進度</button>
+        <button v-if="this.$store.state.isTeacher" class="btn btn-success" data-toggle="modal" data-target=".updateRecordModal" style="margin-left: 10px">更改學生進度</button>
     </div>
 </template>
 <script>

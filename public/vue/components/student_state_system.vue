@@ -21,9 +21,13 @@
                         <br>
                         <h4>學生帳號: {{chosenStudent.id}}</h4>
                         <br>
-                        <h4>入會時間: {{chosenStudent.grade}}</h4>
+                        <h4>家長電話: {{chosenStudent.phoneNumber}}</h4>
                         <br>
-                        <h4>入會學年: {{chosenStudent.grade}}</h4>
+                        <h4>家長Line Id: {{chosenStudent.parentsLineID}}</h4>
+                        <br>
+                        <h4>入會時間: {{chosenStudent.enrollDate}}</h4>
+                        <br>
+                        <h4>入會學年: {{chosenStudent.enrollGrade}}</h4>
                         <br>
                         <h4>未回覆訊息: {{chosenStudent.unReadMessage}}</h4>
                         <br><br>
@@ -117,11 +121,35 @@
                             name: studentList[studentInfo].studentName,
                             grade: studentList[studentInfo].studentGrade,
                             enrollState: enrollState,
-                            unReadMessage: studentList[studentInfo].unReadMessage
+                            unReadMessage: studentList[studentInfo].unReadMessage,
+                            enrollDate: "",
+                            phoneNumber: "",
+                            parentsLineID: "",
+                            enrollGrade: ""
                         }
-                        return
+                        break;
                     }
                 }
+                let vm = this;
+                await $.ajax({
+                    type: "GET",
+                    url: "/user/student/" + studentId,
+                    dataType: "json",
+                    headers : {
+                        "Authorization": Cookies.get("jwtToken")
+                    },
+                    success: function(response) {
+                        vm.chosenStudent.enrollDate = response.enrollYear.toString() + '/' + response.enrollMonth.toString() + '/' + response.enrollDay.toString();
+                        vm.chosenStudent.phoneNumber = response.parentsPhone;
+                        vm.chosenStudent.parentsLineID = response.parentsLineID;
+                        vm.chosenStudent.enrollGrade = response.enrollGrade;
+                    },
+                    error: function(err) {
+                        alert("server error");
+                        console.log(err.responseJSON.err);
+                        return
+                    }
+                });
             },
 
             async reenroll() {
