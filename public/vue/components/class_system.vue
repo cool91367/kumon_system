@@ -285,9 +285,13 @@
 
 
             // 將已打卡的學生反綠
-            let checkInList = JSON.parse(Cookies.get('checkInList'));
-            for(let i = 0;i < checkInList.length;i++) {
-                $('.studentList #' + checkInList[i]).css('color', 'green');
+            try {
+                let checkInList = JSON.parse(Cookies.get('checkInList'));
+                for(let i = 0;i < checkInList.length;i++) {
+                    $('.studentList #' + checkInList[i]).css('color', 'green');
+                }
+            } catch(err) {
+                console.log(err);
             }
 
             await $.ajax({
@@ -611,8 +615,7 @@
 
                                 // 更改studentList的樣式
                                 vm.checkInList.push(vm.chosenStudent.id);
-                                Cookies.set('checkInList', JSON.stringify(vm.checkInList), { expires: 0.5 });
-                                let checkInList = JSON.parse(Cookies.get('checkInList'));
+                                Cookies.set('checkInList', JSON.stringify(vm.checkInList), { expires: 1/4 });// expires in 6 hours
                                 $('.studentList #' + vm.chosenStudent.id).css('color', 'green');
                             },
                             error: function(err) {
