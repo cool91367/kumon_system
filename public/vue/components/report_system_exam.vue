@@ -40,20 +40,20 @@
                     <tr>
                         <th scope="col">年/月/日</th>
                         <th scope="col">學年</th>
-                        <th scope="col">教材</th>
+                        <th scope="col">種類</th>
                         <th scope="col">科目</th>
                         <th scope="col">時間</th>
-                        <th scope="col">正確率</th>
+                        <th scope="col">答題率</th>
                     </tr>
                 </thead>
                 <tbody v-for="(history, idx) in examHistory" :key="idx">
                     <tr v-if="history.subject == displaySubject">
                         <th scope="row">{{history.year + '/' + history.month + '/' + history.day}}</th>
-                        <th id = "grade">{{history.grade}}</th>
-                        <th id = "math">{{history.progress}}</th>
-                        <th id = "ILine" scope="row">{{history.subject}}</th>
-                        <th id = "mathI">{{history.time}}</th>
-                        <th id = "mathI">{{history.score}}</th>
+                        <th >{{history.grade}}</th>
+                        <th  scope="row">{{history.subject}}</th>
+                        <th>{{history.progress}}</th>
+                        <th>{{history.time}}</th>
+                        <th>{{history.score}}</th>
                     </tr>
                 </tbody>
             </table>
