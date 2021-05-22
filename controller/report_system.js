@@ -130,6 +130,10 @@ class ReportSystem {
         await this.reportOperator.addExamResult(studentId, year, month, day, exam);
     }
 
+    async deleteStudentExamResult(studentId, year, month, day, subject) {
+        await this.reportOperator.deleteExamResult(studentId, year, month, day, subject);
+    }
+
     async getStudentExamRecord(studentId) {
         const result = await this.reportOperator.getExamResultByStudentId(studentId);
         return result;

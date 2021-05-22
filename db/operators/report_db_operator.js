@@ -106,6 +106,15 @@ class ReportOperator {
         }}});
     }
 
+    async deleteExamResult(studentId, year, month, day, subject) {
+        await ReportModel.updateOne( {"studentId": studentId }, {$pull: {examRecord: {
+            "year": year,
+            "month": month,
+            "day": day,
+            "subject": subject
+        }}});
+    }
+
     async getExamResultByStudentId(studentId) {
         const result = await ReportModel.aggregate( [
             { "$match": {"studentId": studentId} },

@@ -128,5 +128,21 @@ router.get('/examHistory/:studentId', auth, async function(req, res) {
     return res.status(200).send(result);
 });
 
+router.post('/examHistory/delete', auth, async function(req, res) {
+    try {
+        await reportSystem.deleteStudentExamResult(
+            req.body.studentId,
+            req.body.year,
+            req.body.month,
+            req.body.day,
+            req.body.subject
+        );
+    } catch(err) {
+        console.log(err);
+        return res.status(500).send( {err: err.message} );
+    }
+    return res.status(200).send( {message: "OK"} );
+})
+
 
 module.exports = router;
