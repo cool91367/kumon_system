@@ -31,6 +31,7 @@
                 <input type="text" class="form-control" v-model="inputScore" placeholder="分數" style="margin-left: 2%; margin-right: 2%;margin-top: 1%;">
             </div>
             <button class="btn btn-primary" @click="store" style="margin-top: 1%;">送出</button>
+            <button class="btn btn-danger" @click="deleteExam" style="margin-top: 1%;">刪除</button>
         </div>
 
         <div v-if="examHistory">
@@ -45,21 +46,20 @@
                         <th scope="col">正確率</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">{{examHistory[displayPage].year + '/' + examHistory[displayPage].month + '/' + examHistory[displayPage].day}}</th>
-                        <th id = "grade">{{examHistory[displayPage].grade}}</th>
-                        <th id = "math">{{examHistory[displayPage].progress}}</th>
-                        <th id = "ILine" scope="row">{{examHistory[displayPage].subject}}</th>
-                        <th id = "mathI">{{examHistory[displayPage].time}}</th>
-                        <th id = "mathI">{{examHistory[displayPage].score}}</th>
+                <tbody v-for="(history, idx) in examHistory" :key="idx">
+                    <tr v-if="history.subject == displaySubject">
+                        <th scope="row">{{history.year + '/' + history.month + '/' + history.day}}</th>
+                        <th id = "grade">{{history.grade}}</th>
+                        <th id = "math">{{history.progress}}</th>
+                        <th id = "ILine" scope="row">{{history.subject}}</th>
+                        <th id = "mathI">{{history.time}}</th>
+                        <th id = "mathI">{{history.score}}</th>
                     </tr>
                 </tbody>
             </table>
-            <div class="analyzeArrowArea" style="display: inline;">
-                <img class="analyzeLastPage" src="/img/arrow-left.jpeg" @click="lastPage" height="50" width="50">
-                <img class="analyzeNextPage" src="/img/arrow-right.jpg" @click="nextPage" height="50" width="50" style="margin-left: 90%;">
-            </div>
+            <button type="button" class="btn btn-light" @click="showSubject('數學')">數學</button>
+            <button type="button" class="btn btn-light" @click="showSubject('國語')">國語</button>
+            <button type="button" class="btn btn-light" @click="showSubject('英文')">英文</button>
         </div>
     </div>
 </template>
@@ -70,7 +70,6 @@ module.exports = {
         return {
             inputExam: false,
             examHistory: false,
-            displayPage: null,
             inputYear: "",
             inputMonth: "",
             inputDay: "",
@@ -78,7 +77,8 @@ module.exports = {
             inputProgress: "",
             inputSubject: "",
             inputTime: "",
-            inputScore: ""
+            inputScore: "",
+            displaySubject: "數學"
         }
     },
     props: ["student", "show", "teacher"],
@@ -135,18 +135,8 @@ module.exports = {
         }
     },
     methods: {
-        lastPage() {
-            if(this.displayPage == 0) {
-                return
-            }
-            this.displayPage--;
-        },
-
-        nextPage() {
-            if(this.displayPage >= this.examHistory.length-1) {
-                return
-            }
-            this.displayPage++;
+        showSubject(subject) {
+            this.displaySubject = subject;
         },
 
         showInput() {
@@ -175,6 +165,62 @@ module.exports = {
                 },
                 success: function(response) {
                     alert("儲存成功");
+                    vm.inputYear = "";
+                    vm.inputMonth = "";
+                    vm.inputDay = "";
+                    vm.inputGrade = "";
+                    vm.inputProgress = "";
+                    vm.inputSubject = "";
+                    vm.inputTime = "";
+                    vm.inputScore = "";
+                    vm.inputExam = false
+                    $.ajax({
+                        type: "GET",
+                        url: "/report/examHistory/" + vm.student.studentId,
+                        dataType: "json",
+                        headers : {
+                            "Authorization": Cookies.get("jwtToken")
+                        },
+                        success: function(response) {
+                            vm.examHistory = response.examRecord;
+                            if(vm.examHistory) {
+                                vm.displayPage = vm.examHistory.length-1;
+                            }
+                            else {
+                                vm.displayPage = null;
+                            }
+                        },
+                        error: function(err) {
+                            alert({err: err.message});
+                            return
+                        }
+                    });
+                },
+                error: function(err) {
+                    alert({err: err.message});
+                    return
+                }
+            });
+        },
+
+        deleteExam() {
+            let vm = this;
+            $.ajax({
+                type: "POST",
+                url: "/report/examHistory/delete",
+                dataType: "json",
+                headers : {
+                    "Authorization": Cookies.get("jwtToken")
+                },
+                data: {
+                    studentId: vm.student.studentId, 
+                    year: vm.inputYear,
+                    month: vm.inputMonth,
+                    day: vm.inputDay,
+                    subject: vm.inputSubject, 
+                },
+                success: function(response) {
+                    alert("刪除成功");
                     vm.inputYear = "";
                     vm.inputMonth = "";
                     vm.inputDay = "";
