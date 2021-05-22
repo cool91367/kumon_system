@@ -94,12 +94,6 @@ class ReportOperator {
     }
 
     async addExamResult(studentId, year, month, day, exam) {
-        await ReportModel.updateOne( {"studentId": studentId }, {$pull: {examRecord: {
-            "year": year,
-            "month": month,
-            "day": day
-        }}});
-
         await ReportModel.updateOne( {"studentId": studentId }, {$push: {examRecord: {
             "year": year,
             "month": month,

@@ -4,35 +4,33 @@
         <button v-if="teacher" class="btn btn-primary" @click="showInput">匯入教檢資料</button>
         <br>
         <div v-if="inputExam">
-            <form>
-                <div class="row" style="margin-top: 1%;">
-                    <div class="col">
-                        <input type="text" class="form-control" v-model="inputYear" placeholder="年">
-                    </div>
-                    <div class="col">
-                        <input type="text" class="form-control" v-model="inputMonth" placeholder="月">
-                    </div>
-                    <div class="col">
-                        <input type="text" class="form-control" v-model="inputDay" placeholder="日">
-                    </div>
+            <div class="row" style="margin-top: 1%;">
+                <div class="col">
+                    <input type="text" class="form-control" v-model="inputYear" placeholder="年">
                 </div>
-                <div class="row">
-                    <input type="text" class="form-control" v-model="inputGrade" placeholder="學年" style="margin-left: 2%; margin-right: 2%;margin-top: 1%;">
+                <div class="col">
+                    <input type="text" class="form-control" v-model="inputMonth" placeholder="月">
                 </div>
-                <div class="row">
-                    <input type="text" class="form-control" v-model="inputProgress" placeholder="教材別" style="margin-left: 2%; margin-right: 2%;margin-top: 1%;">
+                <div class="col">
+                    <input type="text" class="form-control" v-model="inputDay" placeholder="日">
                 </div>
-                <div class="row">
-                    <input type="text" class="form-control" v-model="inputSubject" placeholder="科目" style="margin-left: 2%; margin-right: 2%;margin-top: 1%;">
-                </div>
-                <div class="row">
-                    <input type="text" class="form-control" v-model="inputTime" placeholder="時間" style="margin-left: 2%; margin-right: 2%;margin-top: 1%;">
-                </div>
-                <div class="row">
-                    <input type="text" class="form-control" v-model="inputScore" placeholder="分數" style="margin-left: 2%; margin-right: 2%;margin-top: 1%;">
-                </div>
-                <button class="btn btn-primary" @click="store" style="margin-top: 1%;">送出</button>
-            </form>
+            </div>
+            <div class="row">
+                <input type="text" class="form-control" v-model="inputGrade" placeholder="學年" style="margin-left: 2%; margin-right: 2%;margin-top: 1%;">
+            </div>
+            <div class="row">
+                <input type="text" class="form-control" v-model="inputProgress" placeholder="教材別" style="margin-left: 2%; margin-right: 2%;margin-top: 1%;">
+            </div>
+            <div class="row">
+                <input type="text" class="form-control" v-model="inputSubject" placeholder="科目" style="margin-left: 2%; margin-right: 2%;margin-top: 1%;">
+            </div>
+            <div class="row">
+                <input type="text" class="form-control" v-model="inputTime" placeholder="時間" style="margin-left: 2%; margin-right: 2%;margin-top: 1%;">
+            </div>
+            <div class="row">
+                <input type="text" class="form-control" v-model="inputScore" placeholder="分數" style="margin-left: 2%; margin-right: 2%;margin-top: 1%;">
+            </div>
+            <button class="btn btn-primary" @click="store" style="margin-top: 1%;">送出</button>
         </div>
 
         <div v-if="examHistory">
