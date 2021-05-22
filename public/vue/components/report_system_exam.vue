@@ -40,8 +40,8 @@
                     <tr>
                         <th scope="col">年/月/日</th>
                         <th scope="col">學年</th>
-                        <th scope="col">種類</th>
                         <th scope="col">科目</th>
+                        <th scope="col">教材別</th>
                         <th scope="col">時間</th>
                         <th scope="col">答題率</th>
                     </tr>
