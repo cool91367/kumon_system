@@ -63,24 +63,24 @@ class ReportSystem {
     async updateOneProgress(studentId, year, month, math, chinese, english, grade) {
         let progress = {}
         if(math) {
-            progress.math = replaceSubjectTitle(math);
-            progress.mathI = operateILine(ILine[grade][month.toString()], progress.math);
+            progress.math = math;
+            progress.mathI = operateILine(ILine[grade][month.toString()], replaceSubjectTitle(math));
         }
         else{
             progress.math = "";
             progress.mathI = "";
         }
         if(chinese) {
-            progress.chinese = replaceSubjectTitle(chinese);
-            progress.chineseI = operateILine(ILine[grade][month.toString()], progress.chinese);
+            progress.chinese = chinese;
+            progress.chineseI = operateILine(ILine[grade][month.toString()], replaceSubjectTitle(chinese));
         }
         else{
             progress.chinese = "";
             progress.chineseI = "";
         }
         if(english) {
-            progress.english = replaceSubjectTitle(english);
-            progress.englishI = operateILine(ILine[grade][month.toString()], progress.english);
+            progress.english = english;
+            progress.englishI = operateILine(ILine[grade][month.toString()], replaceSubjectTitle(english));
         }
         else {
             progress.english = "";
