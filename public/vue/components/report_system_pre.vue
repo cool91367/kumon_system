@@ -153,7 +153,7 @@ module.exports = {
                     grade: $('#inputRecordGrade').val(),
                     math: $('#inputRecordMath').val(),
                     chinese: $('#inputRecordChinese').val(),
-                    english: $('#inputRecordEhglish').val(),
+                    english: $('#inputRecordEnglish').val(),
                 },
                 success: function() {
                     alert("更改成功");
