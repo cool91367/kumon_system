@@ -1001,7 +1001,9 @@
     //获取某年某月第一天是星期几
     function dayStart(month, year) {
         var tmpDate = new Date(year, month, 1);
-        return (tmpDate.getDay());
+        // 把原本代表星期天的 0 改為 7，以配合refreshDay()的換算
+        const day = tmpDate.getDay() == 0? 7 : tmpDate.getDay();
+        return day;
     }
 
     //计算某年是不是闰年，通过求年份除以4的余数即可
