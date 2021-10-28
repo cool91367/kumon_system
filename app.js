@@ -20,5 +20,5 @@ server.use('/class', classRouter);
 // db connection
 require('./db/mongodb_connection');
 
-server.listen(3000);
-console.log("server start on http://localhost:3000/index")
+server.listen(80);
+console.log("server start on http://localhost/index")
