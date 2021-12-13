@@ -75,25 +75,25 @@
                             <tr>
                                 <th scope="row" id = "Date">{{analyzeHistory[displayPage].year + '/' + analyzeHistory[displayPage].month}}</th>
                                 <th id = "grade">{{analyzeHistory[displayPage].grade}}</th>
-                                <th id = "math">{{analyzeHistory[displayPage].progress.math}}</th>
+                                <th id = "math">數學:{{analyzeHistory[displayPage].progress.math}}</th>
                                 <th id = "ILine" scope="row">{{analyzeHistory[displayPage].iLine}}</th>
-                                <th id = "mathI">{{analyzeHistory[displayPage].ILine.math}}</th>
+                                <th id = "mathI">數學:{{analyzeHistory[displayPage].ILine.math}}</th>
                                 <th id = "predictProgressMath">{{analyzeHistory[displayPage].predict.math}}</th>
                             </tr>
                             <tr>
                                 <th scope="row"></th>
                                 <th ></th>
-                                <th id = "chinese">{{analyzeHistory[displayPage].progress.chinese}}</th>
+                                <th id = "chinese">國語:{{analyzeHistory[displayPage].progress.chinese}}</th>
                                 <th></th>
-                                <th id = "chineseI">{{analyzeHistory[displayPage].ILine.chinese}}</th>
+                                <th id = "chineseI">國語:{{analyzeHistory[displayPage].ILine.chinese}}</th>
                                 <th id = "predictProgressChinese">{{analyzeHistory[displayPage].predict.chinese}}</th>
                             </tr>
                             <tr style="border-width: 10px;">
                                 <th ></th>
                                 <th ></th>
-                                <th id = "english">{{analyzeHistory[displayPage].progress.english}}</th>
+                                <th id = "english">英文:{{analyzeHistory[displayPage].progress.english}}</th>
                                 <th></th>
-                                <th id = "englishI">{{analyzeHistory[displayPage].ILine.english}}</th>
+                                <th id = "englishI">英文:{{analyzeHistory[displayPage].ILine.english}}</th>
                                 <th id = "predictProgressEnglish">{{analyzeHistory[displayPage].predict.english}}</th>
                             </tr>
                         </tbody>
