@@ -34,25 +34,25 @@
                         <tr>
                             <th scope="row" id = "Date">{{analyzeResult.year + '/' + analyzeResult.month}}</th>
                             <th id = "grade">{{analyzeResult.grade}}</th>
-                            <th id = "math">{{analyzeResult.progress.math}}</th>
+                            <th id = "math">數學:{{analyzeResult.progress.math}}</th>
                             <th id = "ILine" scope="row">{{analyzeResult.progress.ILine}}</th>
-                            <th id = "mathI">{{analyzeResult.progress.mathI}}</th>
+                            <th id = "mathI">數學:{{analyzeResult.progress.mathI}}</th>
                             <th id = "predictProgressMath">{{analyzeResult.predictMath}}</th>
                         </tr>
                         <tr>
                             <th scope="row"></th>
                             <th ></th>
-                            <th id = "chinese">{{analyzeResult.progress.chinese}}</th>
+                            <th id = "chinese">國語:{{analyzeResult.progress.chinese}}</th>
                             <th></th>
-                            <th id = "chineseI">{{analyzeResult.progress.chineseI}}</th>
+                            <th id = "chineseI">國語:{{analyzeResult.progress.chineseI}}</th>
                             <th id = "predictProgressChinese">{{analyzeResult.predictChinese}}</th>
                         </tr>
                         <tr style="border-width: 10px;">
                             <th ></th>
                             <th ></th>
-                            <th id = "english">{{analyzeResult.progress.english}}</th>
+                            <th id = "english">英文:{{analyzeResult.progress.english}}</th>
                             <th></th>
-                            <th id = "englishI">{{analyzeResult.progress.englishI}}</th>
+                            <th id = "englishI">英文:{{analyzeResult.progress.englishI}}</th>
                             <th id = "predictProgressEnglish">{{analyzeResult.predictEnglish}}</th>
                         </tr>
                     </tbody>
