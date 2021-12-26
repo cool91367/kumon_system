@@ -46,7 +46,7 @@
                     <th scope="row">數學</th>
                     <td v-for="(progress, idx) in chosenStudentRecordPre" :key="idx">{{progress.progress.math}}</td>
                 </tr>
-                <tr class="mathI" style="background-color:#409FFF">
+                <tr class="mathI" style="background-color:#ADD8E6">
                     <th scope="row">數學(距I線)</th>
                     <td v-for="(progress, idx) in chosenStudentRecordPre" :key="idx">{{progress.progress.mathI}}</td>
                 </tr>
@@ -54,7 +54,7 @@
                     <th scope="row">國語</th>
                     <td v-for="(progress, idx) in chosenStudentRecordPre" :key="idx">{{progress.progress.chinese}}</td>
                 </tr>
-                <tr class="chineseI" style="background-color:#409FFF">
+                <tr class="chineseI" style="background-color:#ADD8E6">
                     <th scope="row">國語(距I線)</th>
                     <td v-for="(progress, idx) in chosenStudentRecordPre" :key="idx">{{progress.progress.chineseI}}</td>
                 </tr>
@@ -62,7 +62,7 @@
                     <th scope="row">英文</th>
                     <td v-for="(progress, idx) in chosenStudentRecordPre" :key="idx">{{progress.progress.english}}</td>
                 </tr>
-                <tr class="englishI" style="background-color:#409FFF">
+                <tr class="englishI" style="background-color:#ADD8E6">
                     <th scope="row">英文(距I線)</th>
                     <td v-for="(progress, idx) in chosenStudentRecordPre" :key="idx">{{progress.progress.englishI}}</td>
                 </tr>
