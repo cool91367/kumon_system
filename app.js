@@ -11,7 +11,7 @@ server.use(cookieParser());
 server.use(logger('dev'));
 server.use(express.urlencoded({ extended: true }));
 server.use(bodyParser.json());
-server.use(bodyParser.urlencoded({ extended: true }));
+server.use(bodyParser.urlencoded({ extended: true })); 
 server.use(express.static('public'));
 server.use('/user', usersRouter);
 server.use('/report', reportRouter);

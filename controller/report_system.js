@@ -40,6 +40,8 @@ class ReportSystem {
             if(progresses[progress].grade == "幼未") {
                 continue;
             }
+            console.log(month)
+            console.log(progresses[progress])
             progresses[progress].ILine = ILine[progresses[progress].grade][month.toString()];
             if(progresses[progress].math) {
                 let math = progresses[progress].math;
