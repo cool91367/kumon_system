@@ -101,11 +101,20 @@ module.exports = {
     }
 }
 function turnNum(progress){
-        var level = progress.substring(0,1);
-        var num = progress.substring(1 , progress.length);
-        String.fromCharCode(level);
+    var level = progress.substring(0,1);
+    var num = progress.substring(1 , progress.length);
+    String.fromCharCode(level);
+    return (level.charCodeAt(0) - "=".charCodeAt(0)) * 200 + Number(num);
+}
+function turnChineseProgressNum(progress) {
+    var level = progress.substring(0,1);
+    var num = progress.substring(1 , progress.length);
+    if(level == "A") {
+        return (level.charCodeAt(0) - "=".charCodeAt(0)) * 200 + Number(num) / 2;
+    } else {
         return (level.charCodeAt(0) - "=".charCodeAt(0)) * 200 + Number(num);
     }
+}
 function turnString(progress){
     var level = String.fromCharCode(parseInt(progress / 200) + 61);
     var num = (progress % 200).toString();
@@ -156,7 +165,7 @@ function drawFlot(select, progress, isTeacher){
             mathCount++;
         }
         if(progress[i].progress.chinese) {
-            dataChinese.push([chineseCount, turnNum(replaceSubjectTitle(progress[i].progress.chinese))]);
+            dataChinese.push([chineseCount, turnChineseProgressNum(replaceSubjectTitle(progress[i].progress.chinese))]);
             dataILineChinese.push([chineseCount , turnNum(replaceSubjectTitle(progress[i].progress.ILine))]);
             dataILineChineseYear.push(progress[i].year);
             dataILineChineseMonth.push(progress[i].month);

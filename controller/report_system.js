@@ -51,7 +51,7 @@ class ReportSystem {
             if(progresses[progress].chinese) {
                 let chinese = progresses[progress].chinese;
                 chinese = replaceSubjectTitle(chinese);
-                progresses[progress].chineseI = operateILine(ILine[progresses[progress].grade][month.toString()] , chinese);
+                progresses[progress].chineseI = operateChineseILine(ILine[progresses[progress].grade][month.toString()] , chinese);
             }
             if(progresses[progress].english) {
                 let english = progresses[progress].english;
@@ -74,7 +74,7 @@ class ReportSystem {
         }
         if(chinese) {
             progress.chinese = chinese;
-            progress.chineseI = operateILine(ILine[grade][month.toString()], replaceSubjectTitle(chinese));
+            progress.chineseI = operateChineseILine(ILine[grade][month.toString()], replaceSubjectTitle(chinese));
         }
         else{
             progress.chinese = "";
@@ -172,6 +172,40 @@ function operateILine(ILine , progress){
     }
     else{
         var myProgressNum = Number(progress.substring(1 , progress.length));
+        var ILineProgressNum = Number(ILine.substring(1 , ILine.length));
+        var diff = ILine.charCodeAt(0) - progress.charCodeAt(0);
+        diff = (diff - 1) * 200;
+        diff += 200 - myProgressNum + ILineProgressNum;
+        return '-' + diff;
+    }
+}
+
+function operateChineseILine(ILine , progress){
+    var myProgressNum;
+    if(progress[0] === 'A') {
+        myProgressNum = Number(progress.substring(1 , progress.length)) / 2
+    } else {
+        myProgressNum = Number(progress.substring(1 , progress.length))
+    }
+
+    if(progress.charCodeAt(0) > ILine.charCodeAt(0)){
+        var ILineProgressNum = Number(ILine.substring(1 , ILine.length));
+        var diff = progress.charCodeAt(0) - ILine.charCodeAt(0);
+        diff = (diff - 1) * 200;
+        diff += (200 - ILineProgressNum) + myProgressNum;
+        return '+' + diff;
+    }
+    else if(progress.charCodeAt(0) == ILine.charCodeAt(0)){
+        var ILineProgressNum = Number(ILine.substring(1 , ILine.length));
+        var diff = myProgressNum - ILineProgressNum;
+        if(diff > 0)
+            return '+' + diff;
+        else if(diff == 0)
+            return "0";
+        else    
+            return diff;
+    }
+    else{
         var ILineProgressNum = Number(ILine.substring(1 , ILine.length));
         var diff = ILine.charCodeAt(0) - progress.charCodeAt(0);
         diff = (diff - 1) * 200;
