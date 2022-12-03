@@ -36,27 +36,27 @@ class ReportSystem {
     }
 
     async addProgressRecord(year, month, progresses) {
+        const formattedMont = parseInt(month, 10)
+
         for (const progress in progresses) {
             if(progresses[progress].grade == "幼未") {
                 continue;
             }
-            console.log(month)
-            console.log(progresses[progress])
-            progresses[progress].ILine = ILine[progresses[progress].grade][month.toString()];
+            progresses[progress].ILine = ILine[progresses[progress].grade][formattedMont.toString()];
             if(progresses[progress].math) {
                 let math = progresses[progress].math;
                 math = replaceSubjectTitle(math);
-                progresses[progress].mathI = operateILine(ILine[progresses[progress].grade][month.toString()] , math);
+                progresses[progress].mathI = operateILine(ILine[progresses[progress].grade][formattedMont.toString()] , math);
             }
             if(progresses[progress].chinese) {
                 let chinese = progresses[progress].chinese;
                 chinese = replaceSubjectTitle(chinese);
-                progresses[progress].chineseI = operateChineseILine(ILine[progresses[progress].grade][month.toString()] , chinese);
+                progresses[progress].chineseI = operateChineseILine(ILine[progresses[progress].grade][formattedMont.toString()] , chinese);
             }
             if(progresses[progress].english) {
                 let english = progresses[progress].english;
                 english = replaceSubjectTitle(english);
-                progresses[progress].englishI = operateILine(ILine[progresses[progress].grade][month.toString()] , english);
+                progresses[progress].englishI = operateILine(ILine[progresses[progress].grade][formattedMont.toString()] , english);
             }
         }
         await this.reportOperator.addProgress(year, month, progresses);
@@ -151,6 +151,7 @@ function replaceSubjectTitle(subject) {
 }
 
 function operateILine(ILine , progress){
+    console.log(ILine)
     if(progress.charCodeAt(0) > ILine.charCodeAt(0)){
         var myProgressNum = Number(progress.substring(1 , progress.length));
         var ILineProgressNum = Number(ILine.substring(1 , ILine.length));
