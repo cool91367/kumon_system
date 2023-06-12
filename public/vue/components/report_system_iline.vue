@@ -109,7 +109,7 @@ function turnNum(progress){
 function turnChineseProgressNum(progress) {
     var level = progress.substring(0,1);
     var num = progress.substring(1 , progress.length);
-    if(level == "A") {
+    if(level == "A" || level == "B") {
         return (level.charCodeAt(0) - "=".charCodeAt(0)) * 200 + Number(num) / 2;
     } else {
         return (level.charCodeAt(0) - "=".charCodeAt(0)) * 200 + Number(num);

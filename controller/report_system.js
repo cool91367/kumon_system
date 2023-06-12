@@ -183,7 +183,7 @@ function operateILine(ILine , progress){
 
 function operateChineseILine(ILine , progress){
     var myProgressNum;
-    if(progress[0] === 'A') {
+    if(progress[0] === 'A' || progress[0] === 'B') {
         myProgressNum = Number(progress.substring(1 , progress.length)) / 2
     } else {
         myProgressNum = Number(progress.substring(1 , progress.length))
