@@ -321,6 +321,7 @@ function calculateNewProgress(now, predict) {
 }
 
 function calculateNewChineseProgress(now, predict) {
+    now = replaceSubjectTitle(now);
     let newProgress = {};
     predict = Number(predict);
 
@@ -352,8 +353,8 @@ function getChineseProgress(num) {
     let number
 
 
-    if(num < 'A' * 200) {
-        level = String.fromCharCode( Math.floor(num / 200) )
+    if(num < 'A'.charCodeAt(0) * 200) {
+        level = replaceSubjectTitleBack( String.fromCharCode( Math.floor(num / 200) ) )
         number = num % 200
     } else if( num >= 'A'.charCodeAt(0) * 200 && num <= 'A'.charCodeAt(0) * 200 + ( 'C'.charCodeAt(0) - 'A'.charCodeAt(0) ) * 400) {
         let temp = num - 'A'.charCodeAt(0) * 200
