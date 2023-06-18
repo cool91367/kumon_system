@@ -20,5 +20,5 @@ server.use('/class', classRouter);
 // db connection
 require('./db/mongodb_connection');
 
-server.listen(8080);
+server.listen(80);
 console.log("server start on http://localhost/report_system.html")
