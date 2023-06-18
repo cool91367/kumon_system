@@ -240,7 +240,7 @@ module.exports = {
             }
             this.analyzeResult.monthNum = this.inputMonthNum;
             this.analyzeResult.predictMath = this.analyzeResult.progress.math? calculateNewProgress(this.analyzeResult.progress.math, this.inputMath) : "";
-            this.analyzeResult.predictChinese = this.analyzeResult.progress.chinese? calculateNewProgress(this.analyzeResult.progress.chinese, this.inputChinese) : "";
+            this.analyzeResult.predictChinese = this.analyzeResult.progress.chinese? calculateNewChineseProgress(this.analyzeResult.progress.chinese, this.inputChinese) : "";
             this.analyzeResult.predictEnglish = this.analyzeResult.progress.english? calculateNewProgress(this.analyzeResult.progress.english, this.inputEnglish) : "";
             this.analyzeResult.progress.ILine = replaceSubjectTitleBack(this.analyzeResult.progress.ILine);
 
@@ -319,6 +319,62 @@ function calculateNewProgress(now, predict) {
     newProgress.number = newProgress.number.toString();
     return newProgress.level + newProgress.number;
 }
+
+function calculateNewChineseProgress(now, predict) {
+    let newProgress = {};
+    predict = Number(predict);
+
+    let nowNumber = getChineseNum(now)
+    console.log(nowNumber)
+
+    nowNumber += predict
+
+    return getChineseProgress(nowNumber)
+    //now = replaceSubjectTitle(now);
+    //newProgress.level = (predict + now.charCodeAt(0) * 200 + Number(now.substring(1 , now.length)) ) / 200;
+    //newProgress.number = (predict + now.charCodeAt(0) * 200 + Number(now.substring(1 , now.length)) ) % 200;
+    //newProgress.level = replaceSubjectTitleBack(String.fromCharCode(newProgress.level));
+    //newProgress.number = newProgress.number.toString();
+    //return newProgress.level + newProgress.number;
+}
+
+function getChineseNum(progress) {
+    if(progress.charCodeAt(0) < 'A'.charCodeAt(0)) {
+        return progress.charCodeAt(0) * 200 + Number(progress.substring(1 , progress.length))
+    } else if(progress.charCodeAt(0) >= 'A'.charCodeAt(0) && progress.charCodeAt(0) <= 'B'.charCodeAt(0)) {
+        return 'A'.charCodeAt(0) * 200 + ( progress.charCodeAt(0) - 'A'.charCodeAt(0) ) * 400 + Number(progress.substring(1 , progress.length))
+    } else {
+        return 'A'.charCodeAt(0) * 200 + ( 'C'.charCodeAt(0) - 'A'.charCodeAt(0) ) * 400 + ( progress.charCodeAt(0) - 'C'.charCodeAt(0) ) * 200 + Number(progress.substring(1 , progress.length))
+    }
+}
+
+function getChineseProgress(num) {
+    let level
+    let number
+
+    console.log("num")
+    console.log(num)
+
+    if(num < 'A' * 200) {
+        level = String.fromCharCode( Math.floor(num / 200) )
+        number = num % 200
+    } else if( num >= 'A'.charCodeAt(0) * 200 && num <= 'A'.charCodeAt(0) * 200 + ( 'C'.charCodeAt(0) - 'A'.charCodeAt(0) ) * 400) {
+        let temp = num - 'A'.charCodeAt(0) * 200
+
+        level = String.fromCharCode( 'A'.charCodeAt(0) + Math.floor(temp / 400) )
+        console.log(level)
+        number = temp % 400
+        console.log(number)
+    } else {
+        let temp = num - ('A'.charCodeAt(0) * 200 + ( 'C'.charCodeAt(0) - 'A'.charCodeAt(0) ) * 400)
+
+        level = String.fromCharCode( 'C'.charCodeAt(0) + Math.floor(temp / 200) )
+        number = temp % 200
+    }
+    return level + number.toString()
+}
+
+
 function replaceSubjectTitle(subject) {
     subject = subject.replace("5A", "=");
     subject = subject.replace("4A", ">");
